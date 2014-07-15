@@ -1,0 +1,12 @@
+﻿  main.cpp
+main.cpp(112): warning C4018: '<' : signed/unsigned mismatch
+main.cpp(232): warning C4018: '<' : signed/unsigned mismatch
+main.cpp(288): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdlib.h(867) : see declaration of 'itoa'
+main.cpp(395): warning C4018: '<' : signed/unsigned mismatch
+main.cpp(422): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+main.cpp(415): warning C4101: 'tv' : unreferenced local variable
+main.cpp(415): warning C4101: 'readfds' : unreferenced local variable
+  Generating code
+  Finished generating code
+  winsock.vcxproj -> C:\Users\Shawn\Documents\Visual Studio 2010\Projects\winsock\Release\winsock.exe

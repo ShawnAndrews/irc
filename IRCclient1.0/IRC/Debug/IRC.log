@@ -1,0 +1,296 @@
+﻿  main.cpp
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(48): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(67): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(81): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(95): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(107): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(119): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4305: 'argument' : truncation from 'double' to 'float'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(130): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(142): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(152): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(152): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(152): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(152): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(161): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(170): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(170): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(180): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(192): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(204): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(216): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(228): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(240): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(256): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(256): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(257): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(257): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(259): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(259): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(260): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(260): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(262): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(262): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(263): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(263): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(265): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(265): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(266): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(266): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(271): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(271): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(272): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(272): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(286): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(286): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(287): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(287): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(289): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(289): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(290): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(290): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(292): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(292): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(293): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(293): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(295): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(295): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(296): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(296): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(302): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(302): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(309): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(309): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(310): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(310): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(325): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(325): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(326): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(326): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(328): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(328): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(329): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(329): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(331): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(331): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(332): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(332): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(334): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(334): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(335): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(335): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(341): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(341): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(342): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(342): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(349): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(349): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(350): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(350): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(365): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(365): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(366): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(366): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(368): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(368): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(369): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(369): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(371): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(371): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(372): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(372): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(374): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(374): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(375): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(375): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(380): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(380): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(381): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(395): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(395): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(396): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(396): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(398): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(398): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(399): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(399): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(401): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(401): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(402): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(402): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(404): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(404): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(405): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(405): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(410): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(410): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(411): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(426): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(426): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(427): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(427): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(429): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(429): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(430): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(430): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(432): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(432): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(433): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(433): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(435): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(435): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(436): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(436): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(441): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(441): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\gui.h(442): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(82): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(125): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(208): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(240): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(358): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(834): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(834): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(842): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(842): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(843): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(849): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(849): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(944): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(967): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(968): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1149): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1150): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1164): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1187): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1188): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1212): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1212): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1213): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1219): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1219): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1220): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1322): warning C4018: '<' : signed/unsigned mismatch
+c:\users\shawn\documents\visual studio 2010\projects\irc\irc\main.cpp(1332): warning C4018: '<' : signed/unsigned mismatch
+  LINK : C:\Users\Shawn\Documents\Visual Studio 2010\Projects\IRC\Debug\IRC.exe not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\Shawn\Documents\Visual Studio 2010\Projects\IRC\Debug\IRC.lib and object C:\Users\Shawn\Documents\Visual Studio 2010\Projects\IRC\Debug\IRC.exp
+  IRC.vcxproj -> C:\Users\Shawn\Documents\Visual Studio 2010\Projects\IRC\Debug\IRC.exe
