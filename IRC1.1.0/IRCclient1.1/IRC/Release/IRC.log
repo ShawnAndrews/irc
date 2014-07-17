@@ -1,0 +1,18 @@
+﻿Build started 17/07/2014 9:29:31 AM.
+     1>Project "C:\Users\Shawn\Desktop\IRCclient1.1\IRC\IRC.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\IRC.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         IRC.vcxproj -> C:\Users\Shawn\Desktop\IRCclient1.1\Release\IRC.exe
+       FinalizeBuildStatus:
+         Deleting file "Release\IRC.unsuccessfulbuild".
+         Touching "Release\IRC.lastbuildstate".
+     1>Done Building Project "C:\Users\Shawn\Desktop\IRCclient1.1\IRC\IRC.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.03
