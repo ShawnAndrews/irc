@@ -1,6 +1,6 @@
 /*
 @author Shawn Andrews
-@version 1.1.0
+@version 1.2.0
 
 Terminology:
 state = The current state of the game.
@@ -8,13 +8,16 @@ state::STATE_MENU = Diplay menu of Host, Join, or Exit options.
 state::STATE_USERNAME = Display screen for user to enter username and press enter, or Back to previous screen.
 state::STATE_KEY =  Display screen for user to enter room key and press enter, or Back to previous screen.
 state::STATE_ROOM = Display chatroom to chat with other users.
+state::STATE_EXIT = Exit client program.
 DEFAULT_BUFLEN = Default buffer length for Winsock's Send() and Recv().
 MAX_USERS = Maximum amount of users per chatroom.
 MAX_DISPLAY_USERS = Maximum amount of users displayed at any one time in GUI user list. Use scroll bar to view more users.
 MAX_MESSAGES = Maximum amount of messages in a chatroom log before the latest post is deleted to make room for new messages.
 MAX_DISPLAY_MESSAGES = Maximum amount of messages displayed at any one time in GUI message list. Use scroll bar to view more messages.
 RANDOM_KEY_RANGE = The number of possible keys available to allocate to various chatrooms.
+MAX_ONE_LINE_CHARACTER_LENGTH = The maximum length of the characters in a string which can be fitted into one line of the message list in a chatroom.
 FPS (Frames per Second) = The number of updates to server and screen per second.
+sendCurrentMessage = If the client requested to send a message to chatroom in prior frame, send it the following frame.
 A chatroom's key = The integer or string of numerals, if its about to be sent accross the network, in the range of 0-(RANDOM_KEY_RANGE-1) (inclusive).
 An id = In terms of a room, it means the key associated to that room; in terms of a user, it means their username.
 
@@ -28,12 +31,12 @@ i) Start the server, automatically assigned to port 3307.
 ii) Run the client. 
 iii) Enter the desired server's WAN IP address, or LAN IP if you're in the same network as the server. 
 iv) Select Host, Join, or Exit.
-v.) If you selected Join, enter the chatroom's key and press enter. Enter your desired username and press enter.
+v.) If you selected Join, enter the chatroom's key and press enter. Then enter your desired username and press enter.
 vi.) You are now in a chatroom.
 
 */
 
-
+//show console window
 //#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
 
 //includes
@@ -66,7 +69,9 @@ vi.) You are now in a chatroom.
 #define MAX_DISPLAY_MESSAGES 17
 #define FPS 20
 
-state gameState; 
+
+//variables
+state currentState;
 GLuint aboutTexture, roomTexture, scrollTexture, backTexture;
 bool hostBoxAlive, joinBoxAlive, exitBoxAlive, roomBoxAlive, backBoxAlive, userBoxAlive, textEnterLogActive, hostnameBoxAlive;
 bool roomIdTextClicked, userIdTextClicked, hostnameIdTextClicked;
@@ -104,22 +109,26 @@ bool serverUp;
 bool firstTimeUserListSent=true;
 
 
-/* Add a line to the chat box */
+/*
+	Chatroom and server functions
+*/
+
+/* Add a message list update to chatroom */
 void addToChat(std::string line){
 	cout << "Add to chat: " << line << endl;
-	//if message is not a server message
+
+	//if string if in proper format
 	if(line.find(':')!=string::npos){
 
 		//find if string requires split into 2 parts
 		float lineFontLength=0.0f;
 		for(int i=0;i<line.size();i++){
+			//calculate length the sum of each individual character's length in the string
 			lineFontLength+=getFontCharWidth(line[i]);
 		}
 		
-		//more than one line
+		//if the message string requires more than 1 line then split it, else add
 		if(lineFontLength>MAX_ONE_LINE_CHARACTER_LENGTH){
-
-			vector<std::string> lineList;
 
 			//find where to split the line into 2 smaller lines
 			float splitLength=0.0f;
@@ -127,36 +136,36 @@ void addToChat(std::string line){
 			int splitTotalCounterPos=0;
 			int splitCounterPos=0;
 						
-			
+			//while the message requires more lines, split it and add to chat
 			while( (splitTotalCounterPos!=line.size()) ){
 
+				//find position to split message
 				while( (splitLength<=MAX_ONE_LINE_CHARACTER_LENGTH) && (splitTotalCounterPos!=line.size()) ){
 					splitLength+=getFontCharWidth(line[splitCounterPos]);
 					splitTotalCounterPos++;
 					splitCounterPos++;
 				}
 
-				//dequeue chat log if chat log is at max messages to make room for new message
+				//dequeue chat log if chat log is at max messages in order to make room for new message
 				if(messageList.size()==MAX_MESSAGES){
 					messageList.erase(messageList.begin());
 				}
+
+				//add splitted chat message into message list
 				messageList.push_back(line.substr(startCounterPos, splitCounterPos));
 
+				//reset split counter and set new split position of string
 				splitLength=0.0f;
 				startCounterPos=splitTotalCounterPos;
 				splitCounterPos=0;
+
 			}
 			
 
 		}else{
 
-			//push line onto chat stack
+			//add message to chat log
 			messageList.push_back(line);
-		}
-
-		float t=0.0f;
-		for(int i=0;i<line.size();i++){
-			t+=getFontCharWidth(line[i]);
 		}
 
 	}else{
@@ -166,7 +175,7 @@ void addToChat(std::string line){
 
 	}
 
-	//move chat log down
+	//move chat log down, if new message in chat log would make message not visible
 	if( (messageList.size()>MAX_DISPLAY_MESSAGES) && ((messageList.size()<(MAX_MESSAGES-MAX_DISPLAY_MESSAGES))) && (chatScrollPos>113.0f) ){
 		chatScrollPos-=CHAT_SCROLL_INCREMENT;
 	}
@@ -206,7 +215,7 @@ void parseCommaDeliminatedServerData(char recvbuf[DEFAULT_BUFLEN]){
 
 					//add user
 					userList.push_back( addedUsername );
-
+					cout << "Userlist size: " << userList.size() << endl;
 					//on first new user display, dont display intial list users, only yourself
 					if(firstTimeUserListSent){
 						if(addedUsername==user_input_id){
@@ -277,8 +286,45 @@ void parseCommaDeliminatedServerData(char recvbuf[DEFAULT_BUFLEN]){
 
 
 	}
-	
-	//cout << "BYE" << endl;
+
+}
+
+/* Initialize states, textures, and enables/disables */
+void initRendering(){
+
+	//seed
+	srand(time(NULL));
+
+	//init font
+	t3dInit();
+
+	//init game state at menu
+	currentState=STATE_HOSTNAME;
+
+	//init message short list
+	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
+		messageListShortList[i]="";
+	}
+
+	//init user short list
+	for(int i=0;i<MAX_DISPLAY_USERS;i++){
+		userShortList[i]="";
+	}
+
+	//textures
+	Image* aboutImage = loadBMP("title.bmp");
+	aboutTexture = loadTexture(aboutImage);
+	Image* roomImage = loadBMP("border.bmp");
+	roomTexture = loadTexture(roomImage);
+	Image* scrollImage = loadBMP("scrollbar.bmp");
+	scrollTexture = loadTexture(scrollImage);
+	Image* backImage = loadBMP("backbutton.bmp");
+	backTexture = loadTexture(backImage);
+
+	//enables/disables
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 }
 
@@ -406,7 +452,8 @@ bool joinServerRoom(){
 
 }
 
-void serverUpdate(){
+/* Update server */
+void updateServer(){
 
 	// if user pressed enter to send a message this frame, send it
 	if(sendCurrentMessage){
@@ -424,7 +471,8 @@ void serverUpdate(){
 
 	//receive and store user data
 	iResult = recv(ConnectSocket, recvbuf, DEFAULT_BUFLEN, 0);
-				
+	
+	//if packet in not empty, parse it 
 	if(iResult>0){
 		cout << "Received: " << recvbuf << endl << endl;
 			
@@ -435,49 +483,46 @@ void serverUpdate(){
 	
 }
 
-void initRendering(){
+/* Update server, user and message list */
+void update(int value) {
 
-	//seed
-	srand(time(NULL));
-
-	//init font
-	t3dInit();
-
-	//hostname_input_id="108.174.165.195";
-
-	//init game state at menu
-	gameState=STATE_HOSTNAME;
-
-	//init message short list
-	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
-		messageListShortList[i]="";
+	/* Update server if in room */
+	if(serverUp){
+		updateServer();
 	}
 
-	//init user short list
+	/* Update user list */
 	for(int i=0;i<MAX_DISPLAY_USERS;i++){
-		userShortList[i]="";
+		if( ((-(((userScrollPos-119)/3)-100)+i)<userList.size()) ){
+			userShortList[i]=userList.at( -(((userScrollPos-119)/3)-100)+i );
+		}else{
+			userShortList[i]="";
+		}
+		
 	}
 
-	//textures
-	Image* aboutImage = loadBMP("title.bmp");
-	aboutTexture = loadTexture(aboutImage);
-	Image* roomImage = loadBMP("border.bmp");
-	roomTexture = loadTexture(roomImage);
-	Image* scrollImage = loadBMP("scrollbar.bmp");
-	scrollTexture = loadTexture(scrollImage);
-	Image* backImage = loadBMP("backbutton.bmp");
-	backTexture = loadTexture(backImage);
+	/* Update message list */
+	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
+		if( ((-(((chatScrollPos-119)/3)-100)+i)<messageList.size()) ){
+			messageListShortList[i]=messageList.at( -(((chatScrollPos-119)/3)-100)+i );
+		}else{
+			messageListShortList[i]="";
+		}
+		
+	}
 
-	//enables/disables
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	glutPostRedisplay();
+	glutTimerFunc(1000/FPS, update, 0);
 }
 
+/*
+	OpenGL event functions
+*/
+
+/* Executed on mouse movement */
 void mouseMovement(int x, int y) {
 	
-	if(gameState==STATE_MENU){
+	if(currentState==STATE_MENU){
 
 		//check if mouse is over host box
 		hostBoxAlive=checkHostBoxAlive(x, y, windowWidth, windowHeight);
@@ -488,7 +533,7 @@ void mouseMovement(int x, int y) {
 		//check if mouse is over exit box
 		exitBoxAlive=checkExitBoxAlive(x, y, windowWidth, windowHeight);
 
-	}else if(gameState==STATE_KEY){
+	}else if(currentState==STATE_KEY){
 
 		//check if mouse is over room box
 		roomBoxAlive=checkRoomBoxAlive(x, y, windowWidth, windowHeight);
@@ -496,7 +541,7 @@ void mouseMovement(int x, int y) {
 		//check if mouse is over back box
 		backBoxAlive=checkBackBoxAlive(x, y, windowWidth, windowHeight);
 
-	}else if(gameState==STATE_USERNAME){
+	}else if(currentState==STATE_USERNAME){
 
 		//check if mouse is over user box
 		userBoxAlive=checkUserBoxAlive(x, y, windowWidth, windowHeight);
@@ -504,7 +549,7 @@ void mouseMovement(int x, int y) {
 		//check if mouse is over back box
 		backBoxAlive=checkBackBoxAlive(x, y, windowWidth, windowHeight);
 
-	}else if(gameState==STATE_HOSTNAME){
+	}else if(currentState==STATE_HOSTNAME){
 
 		//check if mouse is over hostname box
 		hostnameBoxAlive=checkHostnameBoxAlive(x, y, windowWidth, windowHeight);
@@ -512,27 +557,31 @@ void mouseMovement(int x, int y) {
 		//check if mouse is over back box
 		backBoxAlive=checkBackBoxAlive(x, y, windowWidth, windowHeight);
 
+		//check if mouse is over exit box
+		exitBoxAlive=checkExitBoxAlive(x, y, windowWidth, windowHeight);
+
 	}
 
 }
 
+/* Executed on mouse click */
 void mouseClicked(int button, int state, int x, int y){
 
-	if(gameState==STATE_MENU){
+	if(currentState==STATE_MENU){
 
 		// if host box clicked
 		if( checkHostBoxClicked(x, y, windowWidth, windowHeight, button, state) ){
 			HostOrJoin="host";
-			gameState=STATE_USERNAME;
+			currentState=STATE_USERNAME;
 		}
 		
 		// if join box clicked
-		checkJoinBoxClicked(x, y, windowWidth, windowHeight, button, state, gameState);
+		checkJoinBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
 		// if exit box clicked
-		checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, gameState);
+		checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
-	}else if(gameState==STATE_ROOM){
+	}else if(currentState==STATE_ROOM){
 
 		if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
 
@@ -547,13 +596,16 @@ void mouseClicked(int button, int state, int x, int y){
 
 			// check "leave" button
 			if(checkBackButtonClicked(x,y)){
-				gameState=STATE_MENU;
+				//send user back to menu
+				currentState=STATE_MENU;
 				serverUp=false;
+				firstTimeUserListSent=false;
 
 				//reset to blocking socket
 				u_long iMode=0;
 				ioctlsocket(ConnectSocket,FIONBIO,&iMode);
 
+				//erase message and user list
 				while(messageList.size()!=0){
 					messageList.pop_back();
 				}
@@ -567,47 +619,48 @@ void mouseClicked(int button, int state, int x, int y){
 					userShortList[i]="";
 				}
 
-				//reset socket
+				//close socket and reconnect
 				shutdown(ConnectSocket, SD_BOTH);
 				WSACleanup();
 				closesocket(ConnectSocket);
 				connectToServer();
-				firstTimeUserListSent=false;
+				
 			}
 
 		}
 
-	}else if(gameState==STATE_KEY){
+	}else if(currentState==STATE_KEY){
 	
 		// if room box clicked
 		checkRoomBoxClicked(x, y, windowWidth, windowHeight, button, state, roomIdTextClicked);
 	
 		// if back box clicked
-		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, gameState);
+		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
-	}else if(gameState==STATE_USERNAME){
+	}else if(currentState==STATE_USERNAME){
 
 		// if user box clicked
 		checkUserBoxClicked(x, y, windowWidth, windowHeight, button, state, userIdTextClicked);
 	
 		// if back box clicked
-		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, gameState);
+		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
-	}else if(gameState==STATE_HOSTNAME){
+	}else if(currentState==STATE_HOSTNAME){
 
 		// if hostname box clicked
 		checkHostnameBoxClicked(x, y, windowWidth, windowHeight, button, state, hostnameIdTextClicked);
-	
-		// if back box clicked
-		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, gameState);
+
+		// if exit box clicked
+		checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
 	}
 	
 }
 
+/* Executed on mouse click held down */
 void mouseClickedActive(int x, int y){
 
-	if(gameState==STATE_ROOM){
+	if(currentState==STATE_ROOM){
 
 		if(userScrollActive){
 
@@ -639,10 +692,11 @@ void mouseClickedActive(int x, int y){
 
 }
 
+/* Executed on any key press down */
 void handleKeypress(unsigned char key, int x, int y){
 
 	//smooth camera movement
-	if(gameState==STATE_ROOM){
+	if(currentState==STATE_ROOM){
 
 		if(textEnterLogActive){
 			
@@ -723,7 +777,7 @@ void handleKeypress(unsigned char key, int x, int y){
 		//update line one+two into full text string
 		textEnterLog=textEnterLogOne+textEnterLogTwo;
 
-	}else if(gameState==STATE_KEY){
+	}else if(currentState==STATE_KEY){
 		
 		if(roomIdTextClicked){
 			
@@ -735,7 +789,7 @@ void handleKeypress(unsigned char key, int x, int y){
 				//enter key
 				if(checkRoomId(room_input_id)){
 					HostOrJoin="join";
-					gameState=STATE_USERNAME;
+					currentState=STATE_USERNAME;
 				}
 			}else{
 				//if room id's char limit not exceeded, add key
@@ -748,7 +802,7 @@ void handleKeypress(unsigned char key, int x, int y){
 
 		}
 
-	}else if(gameState==STATE_USERNAME){
+	}else if(currentState==STATE_USERNAME){
 
 		if(userIdTextClicked){
 
@@ -760,7 +814,7 @@ void handleKeypress(unsigned char key, int x, int y){
 				//enter key
 				if(joinServerRoom()){
 					serverUp=true;
-					gameState=STATE_ROOM;
+					currentState=STATE_ROOM;
 
 					//change to non-blocking socket
 					u_long iMode=1;
@@ -777,7 +831,7 @@ void handleKeypress(unsigned char key, int x, int y){
 
 		}
 
-	}else if(gameState==STATE_HOSTNAME){
+	}else if(currentState==STATE_HOSTNAME){
 
 		if(key==8){
 			//clear string
@@ -786,7 +840,7 @@ void handleKeypress(unsigned char key, int x, int y){
 		}else if(key==13){
 			//enter key
 			if(connectToServer()){
-				gameState=STATE_MENU;
+				currentState=STATE_MENU;
 			}else{
 				char buffer[7];
 				itoa(lastSocketErrorCode,buffer,10);
@@ -812,13 +866,28 @@ void handleKeypress(unsigned char key, int x, int y){
 
 }
 
+/* Executed on any key press up */
 void handleKeypressUp(unsigned char key, int x, int y){
-
 
 
 }
 
-void drawTexture(GLuint texture){
+/* Handle resize - Don't resize if client attempts to resize */
+void handleResize(int w, int h) {
+	//for resizeable
+	//glViewport(0, 0, w/1.3, h);
+	//windowWidth=w;
+	//windowHeight=h;
+
+	glutReshapeWindow(windowWidth,windowHeight);
+}
+
+/*
+	Draw text, background color, or texture functions
+*/
+
+/* Draw full-window texture background */
+void drawBackground(GLuint texture){
 
 	glViewport(0, 0, windowWidth, windowHeight);
 	glClearColor(1,1,1,0);
@@ -849,7 +918,8 @@ void drawTexture(GLuint texture){
 
 }
 
-void drawTextEnterLog(){
+/* Draw chatroom client's text to send to chatroom */
+void drawRoomClientText(){
 
 	glViewport(20, 19, 510, 80);
 	glClearColor(1,1,1,0);
@@ -899,7 +969,8 @@ void drawTextEnterLog(){
 
 }
 
-void drawChatLog(){
+/* Draw chatroom message list background colors */
+void drawRoomMessageListBackground(){
 
 	glViewport(21, 119, 449, 339);
 	glClearColor(1,1,1,0);
@@ -919,7 +990,6 @@ void drawChatLog(){
 			glVertex2f(1.0,1.0);
 			glVertex2f(0.0,1.0);
 		glEnd();
-		//Added
 	glPopMatrix();
 
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
@@ -951,7 +1021,8 @@ void drawChatLog(){
 
 }
 
-void drawChatScroll(){
+/* Draw chatroom message list scrollbar */
+void drawRoomMessageListScrollbar(){
 
 	glViewport(470, chatScrollPos, 20, 40);
 	glClearColor(1,1,1,0);
@@ -982,7 +1053,8 @@ void drawChatScroll(){
 
 }
 
-void drawMessageList(){
+/* Draw chatroom message list */
+void drawRoomMessageListText(){
 
 	float j=440.0f;
 	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
@@ -996,17 +1068,6 @@ void drawMessageList(){
 		gluOrtho2D(0, 1, 0, 1);
 
 		glColor4f(0.9f,0.9f,0.9f,0.5f);
-
-		//if(messageListShortList[i]!=""){
-		//	glPushMatrix();
-		//		glBegin(GL_QUADS);
-		//			glVertex2f(0.0,0.0);
-		//			glVertex2f(1.0,0.0);
-		//			glVertex2f(1.0,1.0);
-		//			glVertex2f(0.0,1.0);
-		//		glEnd();
-		//	glPopMatrix();
-		//}
 	
 		glPushMatrix();
 			glColor4f(0.15f,0.15f,0.15f,0.5f);
@@ -1024,7 +1085,8 @@ void drawMessageList(){
 
 }
 
-void drawUserLog(){
+/* Draw chatroom user list background colors */
+void drawRoomUserListBackground(){
 
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
 
@@ -1040,14 +1102,12 @@ void drawUserLog(){
 
 	glPushMatrix();
 		glTranslatef(0,0,0.0f);
-		//Your code for drawing.
 		glBegin(GL_QUADS);
 			glVertex2f(0.0,0.0);
 			glVertex2f(1.0,0.0);
 			glVertex2f(1.0,1.0);
 			glVertex2f(0.0,1.0);
 		glEnd();
-		//Added
 	glPopMatrix();
 
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
@@ -1065,14 +1125,12 @@ void drawUserLog(){
 	glColor4f(0.2f,0.2f,0.2f,0.5f);
 
 	glPushMatrix();
-		//Your code for drawing.
 		glBegin(GL_QUADS);
 			glVertex2f(0.0,0.0);
 			glVertex2f(1.0,0.0);
 			glVertex2f(1.0,1.0);
 			glVertex2f(0.0,1.0);
 		glEnd();
-		//Added
 	glPopMatrix();
 
 
@@ -1080,7 +1138,8 @@ void drawUserLog(){
 
 }
 
-void drawUserScroll(){
+/* Draw chatroom user list scrollbar */
+void drawRoomUserListScrollbar(){
 
 	glViewport(599, userScrollPos, 20, 40);
 	glClearColor(1,1,1,0);
@@ -1111,7 +1170,8 @@ void drawUserScroll(){
 
 }
 
-void drawBackBox(){
+/* Draw chatroom back button */
+void drawRoomBackButton(){
 
 	glViewport(556, 19, 64, 80);
 	glClearColor(1,1,1,0);
@@ -1144,32 +1204,8 @@ void drawBackBox(){
 
 }
 
-void drawMenu(){
-
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0,  windowWidth, windowHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-	
-	// title image
-	drawTexture(aboutTexture);
-
-	// host box
-	drawHostBox(hostBoxAlive);
-
-	// join box
-	drawJoinBox(joinBoxAlive);
-
-	// exit box
-	drawExitBox(exitBoxAlive);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-}
-
-void drawUserHeader(){
+/* Draw chatroom user list header text */
+void drawRoomUserListHeaderText(){
 	
 	glViewport(514, 430, 80, 23);
 	glClearColor(1,1,1,0);
@@ -1202,7 +1238,8 @@ void drawUserHeader(){
 
 }
 
-void drawUserList(){
+/* Draw chatroom user list text */
+void drawRoomUserListText(){
 
 	float j=400.0f;
 	for(int i=0;i<MAX_DISPLAY_USERS;i++){
@@ -1243,7 +1280,8 @@ void drawUserList(){
 
 }
 
-void drawRoomAndUserText(){
+/* Draw chatroom information text */
+void drawRoomInformationText(){
 
 	glViewport(20, 460, 320, 20);
 	glClearColor(1,1,1,0);
@@ -1268,36 +1306,68 @@ void drawRoomAndUserText(){
 	glPopMatrix();
 }
 
-void drawRoom(){
+/*
+	Draw state functions
+*/
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+/* Draw menu */
+void drawStateMenu(){
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0,  windowWidth, windowHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
 	
-	drawTexture(roomTexture);
+	// title image
+	drawBackground(aboutTexture);
 
-	drawRoomAndUserText();
+	// host box
+	drawHostBox(hostBoxAlive);
 
-	drawChatLog();
+	// join box
+	drawJoinBox(joinBoxAlive);
 
-	drawChatScroll();
-
-	drawUserLog();
-
-	drawUserScroll();
-
-	drawUserHeader();
-
-	drawUserList();
-
-	drawTextEnterLog();
-
-	drawMessageList();
-
-	drawBackBox();
+	// exit box
+	drawExitBox(exitBoxAlive);
 
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
 }
 
-void drawRoomKey(){
+/* Draw state to retreive menu selection */
+void drawStateRoom(){
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	drawBackground(roomTexture);
+
+	drawRoomInformationText();
+
+	drawRoomMessageListBackground();
+
+	drawRoomMessageListScrollbar();
+
+	drawRoomUserListBackground();
+
+	drawRoomUserListScrollbar();
+
+	drawRoomUserListHeaderText();
+
+	drawRoomUserListText();
+
+	drawRoomClientText();
+
+	drawRoomMessageListText();
+
+	drawRoomBackButton();
+
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+}
+
+/* Draw state to retreive room key of room to join */
+void drawStateRoomKey(){
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0,  windowWidth, windowHeight);
@@ -1308,7 +1378,7 @@ void drawRoomKey(){
 	gluOrtho2D(0, 1, 0, 1);
 
 	// title image
-	drawTexture(aboutTexture);
+	drawBackground(aboutTexture);
 
 	// room box
 	drawRoomBox(roomBoxAlive, room_input_id);
@@ -1319,7 +1389,8 @@ void drawRoomKey(){
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
 }
 
-void drawUsername(){
+/* Draw state to retreive desired username of client */
+void drawStateUsername(){
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0,  windowWidth, windowHeight);
@@ -1330,7 +1401,7 @@ void drawUsername(){
 	gluOrtho2D(0, 1, 0, 1);
 
 	// title image
-	drawTexture(aboutTexture);
+	drawBackground(aboutTexture);
 
 	// user box
 	drawUserBox(userBoxAlive, user_input_id);
@@ -1342,7 +1413,8 @@ void drawUsername(){
 
 }
 
-void drawHostname(){
+/* Draw state to retreive server IP address */
+void drawStateHostname(){
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0,  windowWidth, windowHeight);
@@ -1353,95 +1425,59 @@ void drawHostname(){
 	gluOrtho2D(0, 1, 0, 1);
 
 	// title image
-	drawTexture(aboutTexture);
+	drawBackground(aboutTexture);
 
 	// user box
 	drawHostnameBox(hostnameBoxAlive, hostname_input_id);
 
-	// back box
-	drawBackBox(backBoxAlive);
+	// exit box
+	drawExitBox(exitBoxAlive);
 
 	glColor4f(1.0f,1.0f,1.0f,1.0f);
 
 }
 
-void drawScene() {
+/* Draw state to exit client */
+void drawStateExit(){
+	exit(0);
+}
 
-	if(gameState==STATE_MENU){
-		drawMenu();
-	}else if(gameState==STATE_ROOM){
-		drawRoom();
-	}else if(gameState==STATE_KEY){
-		drawRoomKey();
-	}else if(gameState==STATE_USERNAME){
-		drawUsername();
-	}else if(STATE_HOSTNAME){
-		drawHostname();
+/* Draw current state */
+void drawState() {
+
+	// draw current state
+	if(currentState==STATE_MENU){
+		drawStateMenu();
+	}else if(currentState==STATE_ROOM){
+		drawStateRoom();
+	}else if(currentState==STATE_KEY){
+		drawStateRoomKey();
+	}else if(currentState==STATE_USERNAME){
+		drawStateUsername();
+	}else if(currentState==STATE_HOSTNAME){
+		drawStateHostname();
+	}else if(currentState==STATE_EXIT){
+		drawStateExit();
 	}
 
 	//swap
 	glutSwapBuffers();
 }
 
-void update(int value) {
-
-	/* Update server if in room */
-	if(serverUp){
-		serverUpdate();
-	}
-
-	/* Update user list */
-	for(int i=0;i<MAX_DISPLAY_USERS;i++){
-		if( ((-(((userScrollPos-119)/3)-100)+i)<userList.size()) ){
-			userShortList[i]=userList.at( -(((userScrollPos-119)/3)-100)+i );
-		}else{
-			userShortList[i]="";
-		}
-		
-	}
-
-	/* Update message list */
-	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
-		if( ((-(((chatScrollPos-119)/3)-100)+i)<messageList.size()) ){
-			messageListShortList[i]=messageList.at( -(((chatScrollPos-119)/3)-100)+i );
-		}else{
-			messageListShortList[i]="";
-		}
-		
-	}
-
-	glutPostRedisplay();
-	glutTimerFunc(1000/FPS, update, 0);
-}
-
-void handleResize(int w, int h) {
-	//for resizeable
-	//glViewport(0, 0, w/1.3, h);
-	//windowWidth=w;
-	//windowHeight=h;
-
-	glutReshapeWindow(windowWidth,windowHeight);
-}
-
+/* Main OpenGL loop */
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-
 	glutInitWindowSize(windowWidth, windowHeight);
 	glutCreateWindow("Polished IRC");
-
-	//glutGameModeString( "640x480:32@60" );
-	//glutEnterGameMode();
-	
 	glewInit();
 	GLenum err = glewInit();
     if(GLEW_OK != err) {
 		cout << "glewInit failed." << endl;
     }
 
-	//glutWarpPointer(windowWidth/2, windowHeight/2);
 	initRendering();
-	glutDisplayFunc(drawScene);
+	glutDisplayFunc(drawState);
 	glutMouseFunc(mouseClicked);
 	glutPassiveMotionFunc(mouseMovement);
 	glutMotionFunc(mouseClickedActive);

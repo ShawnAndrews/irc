@@ -58,22 +58,6 @@ int Room::getRoomId(){
 	return room_id;
 }
 
-std::string Room::User::getUsername(){
-	return username;
-}
-
-void Room::User::setUsername(std::string name){
-	username=name;
-}
-
-int Room::User::sizeOfMessageQueue(){
-	return message_queue.size();
-}
-
-int Room::User::sizeOfUserQueue(){
-	return user_queue.size();
-}
-
 //precondition: there is available room in room for new user
 void Room::addUser(std::string username){
 
@@ -81,21 +65,21 @@ void Room::addUser(std::string username){
 
 	//find position for new user
 	for(int i=0; i<MAX_USERS; i++){
-		if(users[i].getUsername()==""){
+		if(getUsername(i)==""){
 			index=i;
 			break;
 		}
 	}
 
 	//set new user in slot
-	users[index].setUsername(username);
+	setUsername(index, username);
 
 	//set status update for all users
 	for(int i=0; i<getUserListSize(); i++){
 
 		//dont add username update status to your own client
-		if(users[i].getUsername()!=username){
-			users[i].enqueueUserStatus("+"+username);
+		if(getUsername(i)!=username){
+			enqueueUserStatus(i, "+"+username);
 		}
 		
 	}
@@ -109,13 +93,13 @@ void Room::deleteUser(std::string username){
 
 	//find index of user to be deleted
 	for(int i=0; i<MAX_USERS; i++){
-		if(users[i].getUsername()==username){
+		if(getUsername(i)==username){
 			foundIndex=i;
 		}
 	}
 
 	//delete user
-	users[foundIndex].setUsername("");
+	setUsername(foundIndex, "");
 
 	//set amount of users to move down
 	moveAmount=getUserListSize()-foundIndex;
@@ -134,7 +118,7 @@ void Room::deleteUser(std::string username){
 
 	//set status update for all users
 	for(int i=0; i<getUserListSize(); i++){
-		users[i].enqueueUserStatus("-"+username);
+		enqueueUserStatus(i, "-"+username);
 	}
 
 }
@@ -152,7 +136,7 @@ void Room::deleteRoom(){
 void Room::initUserList(){
 
 	for(int i=0; i<MAX_USERS; i++){
-		users[i].setUsername("");
+		setUsername(i, "");
 	}
 
 }
@@ -162,7 +146,7 @@ int Room::getUserListSize(){
 	int size=0;
 
 	for(int i=0; i<MAX_USERS; i++){
-		if(users[i].getUsername()!=""){
+		if(getUsername(i)!=""){
 			size++;
 		}
 	}
@@ -176,7 +160,7 @@ int Room::getUserIndexFromUserList(std::string username){
 	int counter=-1;
 
 	for(int i=0; i<MAX_USERS; i++){
-		if(users[i].getUsername()==username){
+		if(getUsername(i)==username){
 			return i;
 		}
 	}
@@ -191,29 +175,47 @@ bool Room::isAvailableUserSlot(){
 	return false;
 }
 
-void Room::User::enqueue(std::string str){
-	message_queue.push(str);
+/* OPERATIONS ON USER */
+
+std::string Room::getUsername(int index){
+	return users[index].username;
 }
 
-std::string Room::User::dequeue(){
+void Room::setUsername(int index, std::string name){
+	users[index].username=name;
+}
 
-	if(message_queue.size()!=NULL){
-		std::string returnPop=message_queue.front();
-		message_queue.pop();
+int Room::sizeOfMessageQueue(int index){
+	return users[index].message_queue.size();
+}
+
+int Room::sizeOfUserQueue(int index){
+	return users[index].user_queue.size();
+}
+
+void Room::enqueueMessage(int index, std::string str){
+	users[index].message_queue.push(str);
+}
+
+std::string Room::dequeueMessage(int index){
+
+	if(users[index].message_queue.size()!=NULL){
+		std::string returnPop=users[index].message_queue.front();
+		users[index].message_queue.pop();
 		return returnPop;
 	}
 	return "";
 }
 
-void Room::User::enqueueUserStatus(std::string str){
-	user_queue.push(str);
+void Room::enqueueUserStatus(int index, std::string str){
+	users[index].user_queue.push(str);
 }
 
-std::string Room::User::dequeueUser(){
+std::string Room::dequeueUserStatus(int index){
 
-	if(user_queue.size()!=NULL){
-		std::string returnPop=user_queue.front();
-		user_queue.pop();
+	if(users[index].user_queue.size()!=NULL){
+		std::string returnPop=users[index].user_queue.front();
+		users[index].user_queue.pop();
 		return returnPop;
 	}
 	return "";

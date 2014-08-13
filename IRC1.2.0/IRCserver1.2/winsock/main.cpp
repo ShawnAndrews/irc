@@ -31,23 +31,6 @@ void initialize_winsock(WSADATA& wsaData, addrinfo& hints, addrinfo** result){
 
 }
 
-/* Reset buffers to zero */
-void initialize_buffers(char recvbuf[DEFAULT_BUFLEN], int& recvbuflen, int& iResult, int& iSendResult){
-
-	// set buffer array elements to zeros
-	for(int i=0;i<DEFAULT_BUFLEN;i++){
-		recvbuf[i]=0;
-	}
-
-	// set buffer len to zero
-	recvbuflen=DEFAULT_BUFLEN;
-
-	// set result and send set to zero
-	iResult=0;
-	iSendResult=0;
-
-}
-
 /* Create a SOCKET and bind to TCP listening socket */
 void set_socketandbind(SOCKET& ListenSocket, addrinfo*& result){
 
@@ -73,7 +56,7 @@ int findEmptyRoom(){
 }
 
 /* Does room exist at argu2's room id? */
-bool isRoomAlive(int foundRoom){
+bool doesRoomExist(int foundRoom){
 
 	/* Does room exist? */
 	for(int i=0;i<MAX_ROOMS;i++){
@@ -90,7 +73,7 @@ int isUserInRoom(int foundRoom, std::string& foundUser){
 
 	for(int i=0;i<serverData[foundRoom].getUserListSize();i++){
 		
-		if(serverData[foundRoom].users[i].getUsername()==foundUser){
+		if(serverData[foundRoom].getUsername(i)==foundUser){
 			return -1;
 		}
 		
@@ -156,19 +139,18 @@ std::string prepareUserAndMessageList(int foundRoomSlot, std::string username){
 
 	//fill buffer with users (U=USERS)
 	t += "U:";
-	for(int i=0;i<serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].sizeOfUserQueue();i++){
+	for(int i=0;i<serverData[foundRoomSlot].sizeOfUserQueue(serverData[foundRoomSlot].getUserIndexFromUserList(username));i++){
 		t += ",";
-		t += serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].dequeueUser();
+		t += serverData[foundRoomSlot].dequeueUserStatus(serverData[foundRoomSlot].getUserIndexFromUserList(username));
 		t += ",";
 	}
-
+	
 	//fill buffer with messages (M=MESSAGES)
-	//cout << "0-9: " << foundRoomSlot << ", size=" << serverData[foundRoomSlot].users.size() << "/" << serverData[foundRoomSlot].getCounterFromUsername(username) << endl;
 	t += "M:";
-	for(int i=0;i<serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].sizeOfMessageQueue();i++){
-		cout << "Size of message queue: " << serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].sizeOfMessageQueue() << endl;
+	for(int i=0;i<serverData[foundRoomSlot].sizeOfMessageQueue(serverData[foundRoomSlot].getUserIndexFromUserList(username));i++){
+		cout << "Size of message queue: " << serverData[foundRoomSlot].sizeOfMessageQueue(serverData[foundRoomSlot].getUserIndexFromUserList(username)) << endl;
 		t += ",";
-		t += serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].dequeue();
+		t += serverData[foundRoomSlot].dequeueMessage(serverData[foundRoomSlot].getUserIndexFromUserList(username));
 		t += ",";
 	}
 
@@ -176,14 +158,12 @@ std::string prepareUserAndMessageList(int foundRoomSlot, std::string username){
 	return t;
 }
 
-/* Once we found a room for user to join or create, send list of all the people in that room at the time of entry so they can populat etheir user list */
+/* Once we found a room for user to join or create, send list of all the people in that room at the time of entry so they can populate their user list */
 void fillUserList(int foundRoomSlot, std::string username){
-	
 	// enqueue a list of user added messages according to the amount of people in that room
 	for(int i=0;i<serverData[foundRoomSlot].getUserListSize();i++){
-		serverData[foundRoomSlot].users[(serverData[foundRoomSlot].getUserIndexFromUserList(username))].enqueueUserStatus("+"+serverData[foundRoomSlot].users[i].getUsername());
+		serverData[foundRoomSlot].enqueueUserStatus(serverData[foundRoomSlot].getUserIndexFromUserList(username), "+"+serverData[foundRoomSlot].getUsername(i));
 	}
-	cout << endl;
 }
 
 /* Display room debug information */
@@ -230,7 +210,7 @@ void roomLoop(ClientParams* lpParam){
 		/* Send current list of room's users and messages to user if list has updated */
 		std::string sendBuffer=prepareUserAndMessageList(lpParam->getHostRoomSlot(), lpParam->getUniqueUserId() );
 		if(sendBuffer != DEFAULT_PACKET_SCHEME){
-			cout << "Sent: " << sendBuffer << endl;
+			cout << "Sent: " << sendBuffer << " \\ To: " << lpParam->getUniqueUserId() << endl;
 			send( lpParam->getSocket(), sendBuffer.c_str(), (int)(strlen(sendBuffer.c_str())+1), 0 );
 		}
 
@@ -243,9 +223,8 @@ void roomLoop(ClientParams* lpParam){
 			// if packet contains data
 			if(recvbuf!=""){
 				// add message to all users' message list
-				
 				for(int i=0;i<serverData[lpParam->getHostRoomSlot()].getUserListSize();i++){
-					serverData[lpParam->getHostRoomSlot()].users[i].enqueue(recvbuf);
+					serverData[lpParam->getHostRoomSlot()].enqueueMessage(i, recvbuf);
 				}
 			}
 			
@@ -268,6 +247,9 @@ void roomLoop(ClientParams* lpParam){
 
 		}
 
+		//wait - to ensure send() doesnt send too fast and consequently gets blocked
+		Sleep(200);
+
 	}
 	
 }
@@ -280,7 +262,7 @@ void connectToRoom(ClientParams* lpParam){
 	char recvbuf[DEFAULT_BUFLEN];
     int recvbuflen=DEFAULT_BUFLEN;	int iResult;
 
-	/* Menu selection - repeat until successfully chosen Join or Host */
+	/* Menu selection - repeat until user has successfully chosen Join or Host */
 	while(!exit){
 
 		// dont exit until menu option is chosen
@@ -339,7 +321,7 @@ void connectToRoom(ClientParams* lpParam){
 			int roomId=atoi(recvbuf);
 
 			// if room exists and room has user slot available
-			if(isRoomAlive(roomId) && isRoomUserSlotAvailable(roomId)){
+			if(doesRoomExist(roomId) && isRoomUserSlotAvailable(roomId)){
 				
 				// send successful join room message
 				send(lpParam->getSocket(), "0",  3, 0);
@@ -384,7 +366,6 @@ DWORD WINAPI processClient(LPVOID lpParam){
 
 	/* initialize random seed */
     srand(time(NULL));
-
 
 	/* Connect to room */
 	connectToRoom((ClientParams*)lpParam);

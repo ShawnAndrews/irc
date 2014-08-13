@@ -9,7 +9,7 @@
 #define TEXT_ENTER_WIDTH_MAX 48.0f
 #define MAX_ONE_LINE_CHARACTER_LENGTH 39.0f
 #define CHAT_SCROLL_INCREMENT 3;
-enum state{STATE_MENU, STATE_USERNAME, STATE_HOSTNAME, STATE_KEY, STATE_ROOM};
+enum state{STATE_MENU, STATE_USERNAME, STATE_HOSTNAME, STATE_KEY, STATE_ROOM, STATE_EXIT};
 
 const int windowHeight=480;
 const int windowWidth=640;
@@ -156,7 +156,7 @@ void checkExitBoxClicked(int x, int y, int windowWidth, int windowHeight, int bu
 		if(pointInRectangle(x,y,
 			0.41*windowWidth,0.56*windowWidth,0.56*windowWidth,0.41*windowWidth,
 			0.79*windowHeight,0.71*windowHeight,0.71*windowHeight,0.79*windowHeight)){
-			exit(0);
+			gameState=STATE_EXIT;
 		}
 	}
 

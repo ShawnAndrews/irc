@@ -31,40 +31,20 @@ struct Room{
 private:
 	struct User{
 
-	private:
+	public:
 		std::string username;
 		queue<std::string> message_queue;
 		queue<std::string> user_queue;
 
-	public:
-		User::User(){};
-		User::User(std::string str):username(str){};
-
-		//get and set username
-		std::string getUsername();
-		void setUsername(std::string name);
-
-		//enqueue and dequeue messages
-		void enqueue(std::string);
-		std::string dequeue();
-		
-		//enqueue and dequeue user statuses
-		void enqueueUserStatus(std::string);
-		std::string dequeueUser();
-
-		//get size of message and user queue
-		int sizeOfMessageQueue();
-		int sizeOfUserQueue();
-
 	};
 	
-	
 	int room_id;
+	User users[MAX_USERS];
 
 public:
 	Room::Room():room_id(NULL){initUserList();}
-	
-	User users[MAX_USERS];
+
+	/* OPERATIONS ON ROOM */ 
 	
 	//room id operations
 	void setRoomId(int);
@@ -88,6 +68,24 @@ public:
 
 	//delete room
 	void deleteRoom();
+
+	/* OPERATIONS ON USERS */ 
+
+	//get and set username
+	std::string getUsername(int index);
+	void setUsername(int index, std::string name);
+
+	//enqueue and dequeue messages
+	void enqueueMessage(int index, std::string);
+	std::string dequeueMessage(int index);
+		
+	//enqueue and dequeue user statuses
+	void enqueueUserStatus(int index, std::string);
+	std::string dequeueUserStatus(int index);
+
+	//get size of message and user queue
+	int sizeOfMessageQueue(int index);
+	int sizeOfUserQueue(int index);
 
 };
 
