@@ -71,7 +71,7 @@ bool doesRoomExist(int foundRoom){
 /* Is user in a specific room? */
 int isUserInRoom(int foundRoom, std::string& foundUser){
 
-	for(int i=0;i<serverData[foundRoom].getUserListSize();i++){
+	for(int i=0;i<serverData[foundRoom].getRoomSize();i++){
 		
 		if(serverData[foundRoom].getUsername(i)==foundUser){
 			return -1;
@@ -107,7 +107,7 @@ bool isRoomUserSlotAvailable(int roomNumber){
 	}
 	
 	//if free user slots exists
-	if(serverData[roomSlot].getUserListSize() < MAX_USERS ){
+	if(serverData[roomSlot].getRoomSize() < MAX_USERS ){
 		return true;
 	}else{
 		return false;
@@ -161,19 +161,27 @@ std::string prepareUserAndMessageList(int foundRoomSlot, std::string username){
 /* Once we found a room for user to join or create, send list of all the people in that room at the time of entry so they can populate their user list */
 void fillUserList(int foundRoomSlot, std::string username){
 	// enqueue a list of user added messages according to the amount of people in that room
-	for(int i=0;i<serverData[foundRoomSlot].getUserListSize();i++){
+	for(int i=0;i<serverData[foundRoomSlot].getRoomSize();i++){
 		serverData[foundRoomSlot].enqueueUserStatus(serverData[foundRoomSlot].getUserIndexFromUserList(username), "+"+serverData[foundRoomSlot].getUsername(i));
 	}
+
 }
 
 /* Display room debug information */
 void printDebug(){
 
-	cout << "~~~~~~~~~~~~ROOMS~~~~~~~~~~~~";
+	cout << "~~~~~~~~~~~~ROOMS~~~~~~~~~~~~" << endl;
 	for(int i=0; i<MAX_ROOMS; i++){
-		cout << "Room #" << i << " : " << serverData[i].getRoomId() << " || Num of users: " << serverData[i].getUserListSize() << "/" << MAX_USERS;
+		cout << "Room #" << i << " : " << serverData[i].getRoomId() << " || " << "Num of users: " << serverData[i].getRoomSize() << "/" << MAX_USERS << " || ";
+		for(int j=0; j<MAX_USERS; j++){
+			if(serverData[i].getUsername(j)!=""){
+				cout << serverData[i].getUsername(j) << " (" << j << ")";
+				cout << ", ";
+			}
+		}
+		cout << endl;
 	}
-	cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 	cout << endl;
 
 }
@@ -198,7 +206,9 @@ void roomLoop(ClientParams* lpParam){
 	/* variables */
 	bool closeConnection=false;
 	char recvbuf[DEFAULT_BUFLEN];
-    int recvbuflen=DEFAULT_BUFLEN;	int iResult;
+    int recvbuflen=DEFAULT_BUFLEN;	int iResult=NULL;
+	std::string sendBuffer="";
+	bool resendPreviousPacket=false;
 
 	/* Join room */
 	while(!closeConnection){
@@ -207,11 +217,23 @@ void roomLoop(ClientParams* lpParam){
 		u_long iMode=1;
 		ioctlsocket(lpParam->getSocket(),FIONBIO,&iMode);
 
-		/* Send current list of room's users and messages to user if list has updated */
-		std::string sendBuffer=prepareUserAndMessageList(lpParam->getHostRoomSlot(), lpParam->getUniqueUserId() );
+		/* If last frame's packet wasn't blocked and needs to be resent, send current list of room's users and messages to user if list has updated */
+		if(!resendPreviousPacket){
+			sendBuffer=prepareUserAndMessageList(lpParam->getHostRoomSlot(), lpParam->getUniqueUserId() );
+		}
+		
+		/* If there is an update to chatroom, attempt to send it */
 		if(sendBuffer != DEFAULT_PACKET_SCHEME){
-			cout << "Sent: " << sendBuffer << " \\ To: " << lpParam->getUniqueUserId() << endl;
-			send( lpParam->getSocket(), sendBuffer.c_str(), (int)(strlen(sendBuffer.c_str())+1), 0 );
+			cout << "Sent: " << sendBuffer << " || To: " << lpParam->getUniqueUserId() << endl;
+			iResult = send( lpParam->getSocket(), sendBuffer.c_str(), (int)(strlen(sendBuffer.c_str())+1), 0 );
+			resendPreviousPacket=false;
+
+			/* If there was an error sending packet, attempt to resend it next frame until it sends successfully */
+			if (iResult == SOCKET_ERROR) {
+				wprintf(L"send failed with error: %d\n", WSAGetLastError());
+				resendPreviousPacket=true;
+				system("pause");
+			}
 		}
 
 		/* Receive user's new message to be added to room */
@@ -223,7 +245,7 @@ void roomLoop(ClientParams* lpParam){
 			// if packet contains data
 			if(recvbuf!=""){
 				// add message to all users' message list
-				for(int i=0;i<serverData[lpParam->getHostRoomSlot()].getUserListSize();i++){
+				for(int i=0;i<serverData[lpParam->getHostRoomSlot()].getRoomSize();i++){
 					serverData[lpParam->getHostRoomSlot()].enqueueMessage(i, recvbuf);
 				}
 			}
@@ -233,22 +255,23 @@ void roomLoop(ClientParams* lpParam){
 			
 			//delete user from list in room
 			serverData[lpParam->getHostRoomSlot()].deleteUser((lpParam->getUniqueUserId()));
-			
+
 			//delete room if user was last to leave room
-			if(serverData[lpParam->getHostRoomSlot()].getUserListSize()==0){
-				serverData[lpParam->getHostRoomSlot()].deleteRoom(); 
+			if(serverData[lpParam->getHostRoomSlot()].getRoomSize()==0){
+				serverData[lpParam->getHostRoomSlot()].deleteRoom();
+				cout << "Room index " << lpParam->getHostRoomSlot() << " has been deleted." << endl;
 			}
-
-			//close connection
-			closeConnection=true;
-
+			
 			//print debug
 			printDebug();
+			
+			//close connection
+			closeConnection=true;
 
 		}
 
 		//wait - to ensure send() doesnt send too fast and consequently gets blocked
-		Sleep(200);
+		Sleep(100);
 
 	}
 	
@@ -291,6 +314,8 @@ void connectToRoom(ClientParams* lpParam){
 				lpParam->setUniqueHostRoomId(serverData);
 				lpParam->setHostRoomSlot(findEmptyRoom());
 
+				cout << "USER = " << lpParam->getUniqueUserId() << endl;
+
 				// add new room and user to server data
 				serverData[lpParam->getHostRoomSlot()].setRoomId(lpParam->getHostRoomId());
 				serverData[lpParam->getHostRoomSlot()].addUser(lpParam->getUniqueUserId());
@@ -320,7 +345,7 @@ void connectToRoom(ClientParams* lpParam){
 			// save room id
 			int roomId=atoi(recvbuf);
 
-			// if room exists and room has user slot available
+			// if room exists, username is unique to other users in room, and room has user slot available
 			if(doesRoomExist(roomId) && isRoomUserSlotAvailable(roomId)){
 				
 				// send successful join room message

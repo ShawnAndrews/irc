@@ -38,11 +38,12 @@ private:
 
 	};
 	
+	int room_size;
 	int room_id;
 	User users[MAX_USERS];
 
 public:
-	Room::Room():room_id(NULL){initUserList();}
+	Room::Room():room_id(NULL), room_size(NULL){initUserList();}
 
 	/* OPERATIONS ON ROOM */ 
 	
@@ -50,15 +51,16 @@ public:
 	void setRoomId(int);
 	int getRoomId();
 
+	//room size operations
+	void setRoomSize(int);
+	int getRoomSize();
+
 	//add user operations
 	void addUser(std::string);
 	void deleteUser(std::string username);
 
 	//get counter from username
 	int getUserIndexFromUserList(std::string);
-
-	//get user list size
-	int getUserListSize();
 
 	//initialize user list's usernames to ""
 	void initUserList();
