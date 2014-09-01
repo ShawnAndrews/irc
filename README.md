@@ -1,4 +1,4 @@
-fps
+Polished IRC 1.3.0
 ===
 
 IRC Project
