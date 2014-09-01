@@ -22,10 +22,10 @@ Polished IRC is a fdl.
 
 ## Revisions
 
-1. IRC 1.0.0
+|* IRC 1.0.0
   * Added complete program.
-2. IRC 1.1.0
+* IRC 1.1.0
   * Improved network efficiency
   * Added ability to create and manage server(Port: 3307)
-3. IRC 1.2.0
+* IRC 1.2.0
   * Increased scability because of switch from multi-threaded to single-threaded server.
