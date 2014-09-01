@@ -22,7 +22,7 @@ Polished IRC is a fdl.
 
 ## Revisions
 
-|* IRC 1.0.0
+* IRC 1.0.0
   * Added complete program.
 * IRC 1.1.0
   * Improved network efficiency
