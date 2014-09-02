@@ -11,10 +11,10 @@ Polished IRC is a fdl.
 ## Features
 
 * Reliable Winsock API using TCP.
-* Ability to quickly create a room id that enables others to join your room.
+* Ability to quickly create a room and allow others to join your room.
 * Able to support 10 rooms at 100 users per room.
 * Client-Server architecture
-* 640x480 resolution(windowed or full-screen)
+* 640x480 resolution(windowed)
 * Custom, hand-written GUI
 * Simple to use with no account creation necessary.
 * Chat log holds 170 of your room's past messages to browse.
@@ -25,7 +25,13 @@ Polished IRC is a fdl.
 * IRC 1.0.0
   * Added complete program.
 * IRC 1.1.0
-  * Improved network efficiency
-  * Added ability to create and manage server(Port: 3307)
+  * Improved network efficiency.
+  * Added ability to create and manage multi-threaded server(Port: 3307).
 * IRC 1.2.0
-  * Increased scability because of switch from multi-threaded to single-threaded server.
+  * Increased scability from switch to single-threaded server.
+  * Improved performance and concurrency from client as it becomes multi-threaded.
+  * Updated GUI.
+
+## Screenshots
+
+![alt tag](http://oi58.tinypic.com/rkv3tk.jpg)
