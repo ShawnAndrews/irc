@@ -6,8 +6,9 @@ Polished IRC 1.2.0
 
 ## What is Polished IRC?
 
-Polished IRC is a fdl.
-
+This program can create chatrooms(up to MAX_ROOMS) that holds communication between multiple users(up the MAX_USERS). 
+Each chatroom is only accessible by having knowledge of the server's IP which is managing the chatroom and that chatroom's 
+key. Messages in a chatroom are transmitted to other users via unencrypted and uncompressed TCP packets.
 ## Features
 
 * Reliable Winsock API using TCP.
