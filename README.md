@@ -6,16 +6,15 @@ Polished IRC 1.2.0
 
 ## What is Polished IRC?
 
-This program can create chatrooms that hold communication between multiple users. Each chatroom is only accessible by having knowledge of the server's IP which is managing the chatroom and that chatroom's key. Messages in a chatroom are transmitted
-to other users via unencrypted and uncompressed TCP packets.
+This program can create chatrooms that hold communication between multiple users. Each chatroom is only accessible by having knowledge of the server's IP which is managing the chatroom and that chatroom's key. Messages in a chatroom are transmitted to other users via unencrypted and uncompressed TCP packets.
 
 ## How it works
 
-1. Start the server, automatically assigned to port 3307. 
+1. Start the server, which is automatically assigned to port 3307. 
 2. Run the client. 
-3. Enter the desired server's WAN IP address, or LAN IP if you're in the same network as the server. 
+3. From the client, enter the desired server's WAN IP address, or LAN IP if you're in the same network as the server to connect to it.
 4. Select Host, Join, or Exit.
-5. If you selected Join, enter the chatroom's key and press enter. Then enter your desired username and press enter.
+5. If you selected Join, enter the chatroom's key, your desired username and press enter. If you selected Host, simply enter your desired username and press enter.
 6. You are now in a chatroom.
 
 ## Features
