@@ -1,7 +1,6 @@
 #include <iostream>
 #include <GL/glut.h>
 #include "text3d.h"
-#include "imageloader.h"
 
 #define MAX_ROOM_ID_CHARS 6
 #define MAX_USER_ID_CHARS 8
@@ -13,23 +12,6 @@ enum state{STATE_MENU, STATE_USERNAME, STATE_HOSTNAME, STATE_KEY, STATE_ROOM, ST
 
 const int windowHeight=480;
 const int windowWidth=640;
-
-GLuint loadTexture(Image* image) {
-	GLuint textureId;
-	glGenTextures(1, &textureId); //Make room for our texture
-	glBindTexture(GL_TEXTURE_2D, textureId); //Tell OpenGL which texture to edit
-	//Map the image to the texture
-	glTexImage2D(GL_TEXTURE_2D,                //Always GL_TEXTURE_2D
-				 0,                            //0 for now
-				 GL_RGB,                       //Format OpenGL uses for image
-				 image->width, image->height,  //Width and height
-				 0,                            //The border of the image
-				 GL_RGB, //GL_RGB, because pixels are stored in RGB format
-				 GL_UNSIGNED_BYTE, //GL_UNSIGNED_BYTE, because pixels are stored
-				                   //as unsigned numbers
-				 image->pixels);               //The actual pixel data
-	return textureId; //Returns the id of the texture
-}
 
 bool pointInRectangle(float px,float py, float rx1, float rx2, float rx3, float rx4, float ry1, float ry2, float ry3, float ry4){
 
@@ -276,9 +258,9 @@ bool checkExitBoxAlive(int x, int y, int windowWidth, int windowHeight){
 void drawHostBox(bool hostBoxAlive){
 
 	if(hostBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS);
 		glVertex2f(0.41, 0.465); //bottom-left
@@ -295,7 +277,7 @@ void drawHostBox(bool hostBoxAlive){
 	glEnd();
 	
 	glPushMatrix();
-		glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+		glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 		glScalef(0.04, 0.04, 0.0f);
 		glTranslatef(10.65, 12.2, 0);
 		t3dDraw2D("Host", -1, 1, 0.2f);
@@ -306,9 +288,9 @@ void drawHostBox(bool hostBoxAlive){
 void drawRoomBox(bool roomBoxAlive, std::string& room_id){
 
 	if(roomBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS);
 		glVertex2f(0.41, 0.465); //bottom-left
@@ -326,14 +308,14 @@ void drawRoomBox(bool roomBoxAlive, std::string& room_id){
 
 	if(room_id.empty()){
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(21.65, 12.2, 0);
 			t3dDraw2D("Room #", -1, 1, 0.2f);
 		glPopMatrix();
 	}else{
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(20.65, 12.2, 0);
 			t3dDraw2D(room_id, -1, 1, 0.2f);
@@ -345,9 +327,9 @@ void drawRoomBox(bool roomBoxAlive, std::string& room_id){
 void drawUserBox(bool userBoxAlive, std::string& user_id){
 
 	if(userBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS);
 		glVertex2f(0.41, 0.465); //bottom-left
@@ -365,14 +347,14 @@ void drawUserBox(bool userBoxAlive, std::string& user_id){
 
 	if(user_id.empty()){
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(21.15, 12.2, 0);
 			float temp=t3dDraw2D("Username", -1, 1, 0.2f);
 		glPopMatrix();
 	}else{
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(20.65, 12.2, 0);
 			t3dDraw2D(user_id, -1, 1, 0.2f);
@@ -384,9 +366,9 @@ void drawUserBox(bool userBoxAlive, std::string& user_id){
 void drawHostnameBox(bool hostnameBoxAlive, std::string& hostname_id){
 
 	if(hostnameBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS);
 		glVertex2f(0.41, 0.465); //bottom-left
@@ -404,14 +386,14 @@ void drawHostnameBox(bool hostnameBoxAlive, std::string& hostname_id){
 
 	if(hostname_id.empty()){
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(21.15, 12.2, 0);
 			float temp=t3dDraw2D("Server IP", -1, 1, 0.2f);
 		glPopMatrix();
 	}else{
 		glPushMatrix();
-			glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+			glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 			glScalef(0.02, 0.04, 0.0f);
 			glTranslatef(20.65, 12.2, 0);
 			t3dDraw2D(hostname_id, -1, 1, 0.2f);
@@ -423,9 +405,9 @@ void drawHostnameBox(bool hostnameBoxAlive, std::string& hostname_id){
 void drawJoinBox(bool joinBoxAlive){
 	
 	if(joinBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS); 
 		glVertex2f(0.41, 0.34); //bottom-left
@@ -442,7 +424,7 @@ void drawJoinBox(bool joinBoxAlive){
 	glEnd();
 
 	glPushMatrix();
-		glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+		glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 		glScalef(0.04, 0.04, 0.0f);
 		glTranslatef(10.65, 9.0, 0);
 		t3dDraw2D("Join", -1, 1, 0.2f);
@@ -453,9 +435,9 @@ void drawJoinBox(bool joinBoxAlive){
 void drawBackBox(bool backBoxAlive){
 	
 	if(backBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS); 
 		glVertex2f(0.41, 0.34); //bottom-left
@@ -472,7 +454,7 @@ void drawBackBox(bool backBoxAlive){
 	glEnd();
 
 	glPushMatrix();
-		glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+		glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 		glScalef(0.04, 0.04, 0.0f);
 		glTranslatef(10.65, 9.0, 0);
 		float temp=t3dDraw2D("Back", -1, 1, 0.2f);
@@ -483,9 +465,9 @@ void drawBackBox(bool backBoxAlive){
 void drawExitBox(bool exitBoxAlive){
 	
 	if(exitBoxAlive){
-		glColor4f(0.9f, 0.9f, 0.9f, 0.4f);
+		glColor4f(0.3f, 0.3f, 0.9f, 0.3f);
 	}else{
-		glColor4f(0.7f, 0.7f, 0.7f, 0.4f);
+		glColor4f(0.0f, 0.0f, 0.7f, 0.3f);
 	}
 	glBegin(GL_QUADS); 
 		glVertex2f(0.41, 0.208); //bottom-left
@@ -502,7 +484,7 @@ void drawExitBox(bool exitBoxAlive){
 	glEnd();
 
 	glPushMatrix();
-		glColor4f(0.6f, 0.6f, 0.6f, 0.3f);
+		glColor4f(0.35f, 0.35f, 0.75f, 1.0f);
 		glScalef(0.04, 0.04, 0.0f);
 		glTranslatef(10.65, 5.75, 0);
 		t3dDraw2D("Exit", -1, 1, 0.2f);

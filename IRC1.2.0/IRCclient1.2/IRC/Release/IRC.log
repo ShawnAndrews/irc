@@ -1,365 +1,160 @@
-﻿Build started 12/08/2014 8:15:22 PM.
-     1>Project "C:\Users\Shawn\Desktop\IRCclient1.2\IRC\IRC.vcxproj" on node 2 (build target(s)).
-     1>InitializeBuildStatus:
-         Creating "Release\IRC.unsuccessfulbuild" because "AlwaysCreate" was specified.
-       ClCompile:
-         All outputs are up-to-date.
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\Shawn\Desktop\IRCclient1.2\IRC /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+﻿Build started 01/09/2014 7:11:08 PM.
+     1>Project "C:\Users\Shawn\Desktop\IRCclient1.22\IRC\IRC.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IC:\Users\Shawn\Desktop\IRCclient1.2\IRC /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(50): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(69): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(83): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(97): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(111): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(123): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(135): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(146): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(158): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(177): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(186): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(186): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(208): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(220): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(232): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(244): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(256): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(268): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(284): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(284): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(285): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(285): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(287): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(287): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(288): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(288): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(290): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(290): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(291): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(291): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(293): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(293): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(294): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(294): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(299): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(299): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(300): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(300): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(314): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(314): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(315): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(315): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(317): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(317): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(318): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(318): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(320): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(320): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(321): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(321): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(323): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(323): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(324): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(324): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(330): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(330): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(331): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(331): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(337): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(337): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(338): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(338): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(353): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(353): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(354): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(354): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(356): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(356): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(357): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(357): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(359): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(359): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(360): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(360): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(362): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(362): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(363): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(363): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(369): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(369): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(370): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(370): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(376): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(376): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(377): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(377): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(392): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(392): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(393): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(393): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(395): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(395): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(396): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(396): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(398): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(398): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(399): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(399): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(401): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(401): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(402): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(402): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(408): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(408): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(409): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(409): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(415): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(415): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(416): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(416): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(431): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(431): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(432): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(432): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(434): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(434): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(435): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(435): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(437): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(437): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(438): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(438): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(440): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(440): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(441): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(441): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(446): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(446): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(447): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(461): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(461): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(462): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(462): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(464): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(464): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(465): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(465): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(467): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(467): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(468): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(468): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(470): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(470): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(471): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(471): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(476): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(476): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(477): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(491): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(491): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(492): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(492): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(494): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(494): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(495): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(495): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(497): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(497): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(498): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(498): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(500): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(500): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(501): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(501): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(506): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(506): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>c:\users\shawn\desktop\ircclient1.2\irc\GUI.h(507): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(125): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(244): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(276): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(296): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>main.cpp(496): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(506): warning C4018: '<' : signed/unsigned mismatch
-     1>main.cpp(846): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdlib.h(867) : see declaration of 'itoa'
-     1>main.cpp(950): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(950): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(958): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(958): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(959): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>main.cpp(965): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(965): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1062): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
-     1>main.cpp(1074): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1075): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1231): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1232): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1247): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
-     1>main.cpp(1270): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1271): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1296): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1296): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1297): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-     1>main.cpp(1304): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(32): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(51): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(51): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(65): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(65): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(79): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(79): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(93): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(93): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(105): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(105): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(117): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(117): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(128): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(128): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(140): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(140): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(150): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(159): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(168): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(178): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(178): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(190): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(190): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(202): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(202): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(214): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(214): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(226): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(226): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(238): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(238): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(250): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(250): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(266): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(267): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(269): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(270): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(272): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(273): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(275): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(276): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(281): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(282): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(296): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(297): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(299): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(300): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(302): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(305): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(306): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(312): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(313): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(319): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(320): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(335): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(336): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(338): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(339): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(341): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(342): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(344): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(345): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(351): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(352): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(358): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(359): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(374): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(375): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(377): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(378): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(380): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(381): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(383): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(384): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(390): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(391): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(397): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(398): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(413): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(414): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(416): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(417): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(419): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(420): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(422): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(423): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(428): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(429): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(443): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(444): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(446): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(447): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(449): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(450): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(452): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(453): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(458): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(459): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(473): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(474): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(476): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(477): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(479): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(480): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(482): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(483): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(488): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\users\shawn\desktop\ircclient1.22\irc\GUI.h(489): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(188): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(225): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(344): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(352): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(353): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>main.cpp(359): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(404): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>main.cpp(416): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(417): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(486): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(487): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(502): warning C4244: 'argument' : conversion from 'float' to 'GLint', possible loss of data
+     1>main.cpp(525): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(526): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(552): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(559): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>main.cpp(560): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>main.cpp(762): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(881): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(913): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(980): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>main.cpp(1149): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdlib.h(909) : see declaration of 'itoa'
+     1>main.cpp(1208): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(1218): warning C4018: '<' : signed/unsigned mismatch
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.exe" /NOLOGO /LIBPATH:C:\Users\Shawn\Desktop\IRCclient1.2\IRC\lib opengl32.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\IRC.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.lib" /MACHINE:X86 Release\glew.obj
-         Release\imageloader.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.exe" /NOLOGO /LIBPATH:C:\Users\Shawn\Desktop\IRCclient1.2\IRC\lib opengl32.lib glut32.lib SOIL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.lib" /MACHINE:X86 /SAFESEH Release\glew.obj
          Release\main.obj
          Release\SOCKETclient.obj
          Release\text3d.obj
-            Creating library C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.lib and object C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.exp
+     1>SOIL.lib(SOIL.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+            Creating library C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.lib and object C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.exp
+     1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
          Generating code
          Finished generating code
-         IRC.vcxproj -> C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.exe
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Shawn\Desktop\IRCclient1.2\Release\IRC.exe;#1" /manifest Release\IRC.exe.intermediate.manifest
-       FinalizeBuildStatus:
-         Deleting file "Release\IRC.unsuccessfulbuild".
-         Touching "Release\IRC.lastbuildstate".
-     1>Done Building Project "C:\Users\Shawn\Desktop\IRCclient1.2\IRC\IRC.vcxproj" (build target(s)).
+     1>SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'C:\Users\Shawn\Desktop\IRCclient1.22\Release\vc100.pdb'; linking object as if no debug info
+     1>SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'C:\Users\Shawn\Desktop\IRCclient1.22\Release\vc100.pdb'; linking object as if no debug info
+     1>SOIL.lib(SOIL.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'SOIL.lib(SOIL.obj)' or at 'C:\Users\Shawn\Desktop\IRCclient1.22\Release\vc100.pdb'; linking object as if no debug info
+     1>SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'C:\Users\Shawn\Desktop\IRCclient1.22\Release\vc100.pdb'; linking object as if no debug info
+         IRC.vcxproj -> C:\Users\Shawn\Desktop\IRCclient1.22\Release\IRC.exe
+     1>Done Building Project "C:\Users\Shawn\Desktop\IRCclient1.22\IRC\IRC.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:02.27

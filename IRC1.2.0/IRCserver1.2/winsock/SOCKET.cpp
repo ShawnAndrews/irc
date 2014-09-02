@@ -8,6 +8,14 @@ void ClientParams::setSocket(SOCKET socket){
 	sock=socket;
 }
 
+void ClientParams::setState(state st){
+	STATE=st;
+}
+
+state ClientParams::getState(){
+	return STATE;
+}
+
 int ClientParams::setUniqueHostRoomId(Room* serverData){
 
 	int id;
@@ -28,6 +36,10 @@ int ClientParams::setUniqueHostRoomId(Room* serverData){
 	hostroom_id=id;
 
 	return id;
+}
+
+void ClientParams::setHostRoomId(int roomId){
+	hostroom_id=roomId;
 }
 
 void ClientParams::setHostRoomSlot(int id){
@@ -200,16 +212,10 @@ void Room::setUsername(int index, std::string name){
 }
 
 int Room::sizeOfMessageQueue(int index){
-	//cout << "Find message: " << index << endl;
-	int si=users[index].message_queue.size();
-	//cout << "Find message complete: " << index << endl;
 	return users[index].message_queue.size();
 }
 
 int Room::sizeOfUserQueue(int index){
-	//cout << "Find index: " << index << endl;
-	int si=users[index].user_queue.size();
-	//cout << "Find index complete: " << index << endl;
 	return users[index].user_queue.size();
 }
 

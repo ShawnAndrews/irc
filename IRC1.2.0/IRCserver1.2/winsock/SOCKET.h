@@ -20,11 +20,12 @@
 using namespace std;
 
 #define RANDOM_KEY_RANGE 1000000
-#define DEFAULT_BUFLEN 2048
+#define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "3307"
 #define MAX_ROOMS 10
 #define MAX_USERS 100
 #define DEFAULT_PACKET_SCHEME "U:M:"
+enum state{STATE_MENU, STATE_ROOM};
 
 struct Room{
 
@@ -98,9 +99,10 @@ private:
 	int hostroom_slot;
     int hostroom_id;
 	std::string uniqueuser_id;
+	state STATE;
 	
 public:
-	ClientParams::ClientParams():sock(INVALID_SOCKET), hostroom_id(NULL){};
+	ClientParams::ClientParams():sock(INVALID_SOCKET), hostroom_id(NULL), STATE(STATE_MENU){};
 
 	SOCKET getSocket();
 	void setSocket(SOCKET);
@@ -109,7 +111,11 @@ public:
 	int getHostRoomSlot();
 
 	int setUniqueHostRoomId(Room*);
+	void setHostRoomId(int);
 	int getHostRoomId();
+
+	state getState();
+	void setState(state);
 
 	void setUniqueUserId(std::string);
 	std::string getUniqueUserId();

@@ -55,30 +55,33 @@ vi.) You are now in a chatroom.
 #include <time.h>
 #include <GL/glut.h>
 #include <queue>
+#include <thread>
+#include <chrono>
 
 #include "GUI.h"
 #include "text3d.h"
-#include "imageloader.h"
 #include "SOCKETclient.h"
-
+#include <SOIL/SOIL.h>
 
 #define DEFAULT_BUFLEN 2048
 #define MAX_USERS 100
 #define MAX_DISPLAY_USERS 10
 #define MAX_MESSAGES 170
 #define MAX_DISPLAY_MESSAGES 17
+#define MAX_LOADING_FRAMES 28
+#define MAX_MENU_ANIMATION_FRAMES 50
+#define MAX_BORDER_ANIMATION_FRAMES 50
 #define FPS 20
 
 
 //variables
 state currentState;
-GLuint aboutTexture, roomTexture, scrollTexture, backTexture;
+GLuint aboutTexture, roomTexture, scrollTexture, loadingTexture[MAX_LOADING_FRAMES], currentLoadingTexture, menuAnimationTexture[MAX_MENU_ANIMATION_FRAMES], currentMenuAnimationTexture, borderAnimationTexture[MAX_MENU_ANIMATION_FRAMES], currentBorderAnimationTexture;
 bool hostBoxAlive, joinBoxAlive, exitBoxAlive, roomBoxAlive, backBoxAlive, userBoxAlive, textEnterLogActive, hostnameBoxAlive;
 bool roomIdTextClicked, userIdTextClicked, hostnameIdTextClicked;
 int room_id, user_id;
 std::string room_input_id, user_input_id, hostname_input_id;
 int room_id_len, user_id_len, hostname_id_len;
-std::string yo;
 WSADATA wsaData;
 SOCKET ConnectSocket = INVALID_SOCKET;
 struct addrinfo *result = NULL,
@@ -105,9 +108,643 @@ std::string textEnterLogOne, textEnterLogTwo;
 float textEnterLogTextLen;
 std::string textEnterLog, lastSentTextEnterLog;
 bool sendCurrentMessage;
-bool serverUp;
 bool firstTimeUserListSent=true;
+bool loadingState=false;
+int loadingIconCounter, subLoadingIconCounter, menuAnimationCounter, subMenuAnimationCounter, borderAnimationCounter, subBorderAnimationCounter;
+string loadingStateText;
 
+
+/*
+	Draw text, background color, or texture functions
+*/
+
+/* Draw full-window texture background */
+void drawBackground(GLuint texture){
+
+	glViewport(0, 0, windowWidth, windowHeight);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	//enables/disables
+	glEnable(GL_TEXTURE_2D);
+
+	//bind texture
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	//draw about screen
+	glBegin(GL_QUADS); 
+		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 1.0f); //top-left
+		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 1.0f); //top-right
+		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  0.0f); //bottom-right
+		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  0.0f); //bottom-left
+	glEnd();
+
+	//enables/disables
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+/* Draw loading screen */
+void drawLoadingScreen(){
+	
+	glViewport(0, 0, windowWidth, windowHeight);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	/* Update counter */
+	subLoadingIconCounter++;
+	
+	if(subLoadingIconCounter==2){
+		loadingIconCounter++;
+		
+		if(loadingIconCounter>(MAX_LOADING_FRAMES-1)){
+			loadingIconCounter=0;
+		}else{
+			currentLoadingTexture=loadingTexture[loadingIconCounter];
+		}
+
+		subLoadingIconCounter=0;
+	}
+
+	/* Draw loading icon animation */
+	glPushMatrix();
+
+		glEnable(GL_TEXTURE_2D);
+
+		//bind texture
+		glBindTexture(GL_TEXTURE_2D, currentLoadingTexture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glColor4f(1,1,1,0.9);
+		glTranslatef(0.03f,0.885f,0.0f);
+
+		//draw about screen
+		glBegin(GL_QUADS); 
+			glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f, 0.07f); //top-left
+			glTexCoord2f( 1.0f, 1.0f );glVertex2f( 0.07f, 0.07f); //top-right
+			glTexCoord2f( 1.0f, 0.0f );glVertex2f( 0.07f, 0.0f); //bottom-right
+			glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //bottom-left
+		glEnd();
+
+		glDisable(GL_TEXTURE_2D);
+
+	glPopMatrix();
+	
+	/* Draw loading background */
+	glPushMatrix();
+		
+		glColor4f(0.8f,0.8f,0.8f,0.2f);
+		glTranslatef(0.02f,0.57f,0.0f);
+
+		//draw about screen
+		glBegin(GL_QUADS);
+			glVertex2f( 0.0f, 0.4f); //top-left
+			glVertex2f( 0.3f, 0.4f); //top-right
+			glVertex2f( 0.3f, 0.3f); //bottom-right
+			glVertex2f( 0.0f, 0.3f); //bottom-left
+		glEnd();
+		
+		glColor3f(1,1,1);
+		
+	glPopMatrix();
+	
+
+	/* Draw loading text */
+	glPushMatrix();
+		glColor4f(0.9f,0.9f,0.9f,0.85f);
+		glScalef(0.025, 0.05, 0.0f);
+		glTranslatef(5.5, 18, 0);
+		t3dDraw2D(loadingStateText, -1, 1, 0.2f);
+	glPopMatrix();
+
+	glColor4f(1,1,1,1);
+	
+}
+
+/* Draw menu animation overlay */
+void drawMenuAnimationOverlay(){
+
+	subMenuAnimationCounter++;
+
+	if(subMenuAnimationCounter==2){
+
+		menuAnimationCounter++;
+
+		if(menuAnimationCounter>(MAX_MENU_ANIMATION_FRAMES-1)){
+			menuAnimationCounter=0;
+		}else{
+			currentMenuAnimationTexture=menuAnimationTexture[menuAnimationCounter];
+		}
+		
+		subMenuAnimationCounter=0;
+
+	}
+
+	glViewport(0, 0, windowWidth, windowHeight);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	//enables/disables
+	glEnable(GL_TEXTURE_2D);
+
+	//bind texture
+	glBindTexture(GL_TEXTURE_2D, currentMenuAnimationTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	//draw
+	glBegin(GL_QUADS); 
+		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f, 0.0f); //top-left
+		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f, 0.0f); //top-right
+		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
+		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
+	glEnd();
+
+	//enables/disables
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+/* Draw room border animation */
+void drawRoomBorder(){
+
+	subBorderAnimationCounter++;
+
+	if(subBorderAnimationCounter==1){
+
+		borderAnimationCounter++;
+
+		if(borderAnimationCounter>(MAX_BORDER_ANIMATION_FRAMES-1)){
+			borderAnimationCounter=0;
+		}else{
+			currentBorderAnimationTexture=borderAnimationTexture[borderAnimationCounter];
+		}
+		
+		subBorderAnimationCounter=0;
+
+	}
+
+	glViewport(0, 0, windowWidth, windowHeight);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	//enables/disables
+	glEnable(GL_TEXTURE_2D);
+
+	//bind texture
+	glBindTexture(GL_TEXTURE_2D, currentBorderAnimationTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	//draw
+	glBegin(GL_QUADS); 
+		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f, 0.0f); //top-left
+		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f, 0.0f); //top-right
+		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
+		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
+	glEnd();
+
+	//enables/disables
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+/* Draw chatroom client's text to send to chatroom */
+void drawRoomClientText(){
+
+	glViewport(20, 19, 510, 80);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+
+	glPushMatrix();
+		glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+		glScalef(0.02, 0.15, 0.0f);
+		glTranslatef(1.0, 5.0, 0.0);
+		float offsetRoomIdText=t3dDraw2D(user_input_id+":  ", -1, 1, 0.2f);
+		textEnterLogTextLen=offsetRoomIdText;
+	glPopMatrix();
+	
+	glPushMatrix();
+		glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+		glScalef(0.02, 0.15, 0.0f);
+		glTranslatef(offsetRoomIdText+0.75, 5.0, 0.0);
+		float toffsetRoomIdText=t3dDraw2D(textEnterLogOne, -1, 1, 0.2f);
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+		glScalef(0.02, 0.15, 0.0f);
+		glTranslatef(0.75, 3.25, 0.0);
+		float ttoffsetRoomIdText=t3dDraw2D(textEnterLogTwo, -1, 1, 0.2f);
+	glPopMatrix();
+
+}
+
+/* Draw chatroom message list scrollbar */
+void drawRoomMessageListScrollbar(){
+
+	glViewport(470, chatScrollPos, 20, 40);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	//enables/disables
+	glEnable(GL_TEXTURE_2D);
+
+	//bind texture
+	glBindTexture(GL_TEXTURE_2D, scrollTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	//draw about screen
+	glBegin(GL_QUADS); 
+		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
+		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
+		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
+		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
+	glEnd();
+
+	//enables/disables
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+/* Draw chatroom message list */
+void drawRoomMessageListText(){
+
+	float j=440.0f;
+	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
+
+		glViewport(24, j, 443, 20);
+		glClearColor(1,1,1,0);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		gluOrtho2D(0, 1, 0, 1);
+
+		glColor4f(0.9f,0.9f,0.9f,0.5f);
+	
+		glPushMatrix();
+			glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+			glScalef(0.025, 0.75, 0.0f);
+			glTranslatef(0.15, 0.0, 0);
+			float temp=t3dDraw2D(messageListShortList[i], -1, 1, 0.2f);
+		glPopMatrix();
+
+		//space between messages in message list
+		j-=20.0f;
+	}
+
+
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+
+}
+
+/* Draw chatroom user list scrollbar */
+void drawRoomUserListScrollbar(){
+
+	glViewport(599, userScrollPos, 20, 40);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	//enables/disables
+	glEnable(GL_TEXTURE_2D);
+	
+	//bind texture
+	glBindTexture(GL_TEXTURE_2D, scrollTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	//draw about screen
+	glBegin(GL_QUADS); 
+		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
+		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
+		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
+		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
+	glEnd();
+
+	//enables/disables
+	glDisable(GL_TEXTURE_2D);
+
+}
+
+/* Draw chatroom user list header text */
+void drawRoomUserListHeaderText(){
+	
+	glViewport(514, 430, 80, 23);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	glColor4f(0.0f,0.0f,0.1f,0.05f);
+
+	glPushMatrix();
+		glBegin(GL_QUADS);
+			glVertex2f(0.0,0.0);
+			glVertex2f(1.0,0.0);
+			glVertex2f(1.0,1.0);
+			glVertex2f(0.0,1.0);
+		glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+		glScalef(0.2, 1.0, 0.0f);
+		glTranslatef(0.85, 0.0, 0);
+		float temp=t3dDraw2D("Users", -1, 1, 0.2f);
+	glPopMatrix();
+
+
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+
+}
+
+/* Draw chatroom user list text */
+void drawRoomUserListText(){
+
+	float j=400.0f;
+	for(int i=0;i<MAX_DISPLAY_USERS;i++){
+
+		glViewport(514, j, 80, 20);
+		glClearColor(1,1,1,0);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		gluOrtho2D(0, 1, 0, 1);
+
+		glColor4f(0.0f,0.0f,0.1f,0.05f);
+
+		if(userShortList[i]!=""){
+			glPushMatrix();
+				glBegin(GL_QUADS);
+					glVertex2f(0.0,0.0);
+					glVertex2f(1.0,0.0);
+					glVertex2f(1.0,1.0);
+					glVertex2f(0.0,1.0);
+				glEnd();
+			glPopMatrix();
+		}
+
+		glPushMatrix();
+			glColor4f(0.0f, 0.0f, 0.8f, 0.6f);
+			glScalef(0.125, 0.85, 0.0f);
+			glTranslatef(0.15, 0.0, 0);
+			float temp=t3dDraw2D(userShortList[i], -1, 1, 0.2f);
+		glPopMatrix();
+
+		j-=30.0f;
+	}
+
+
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+
+}
+
+/* Draw chatroom information text */
+void drawRoomInformationText(){
+
+	glViewport(0, 0, windowWidth, windowHeight);
+	glClearColor(1,1,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+
+	glPushMatrix();
+		glColor4f(0.5f, 0.8f, 0.9f, 0.5f);
+		glScalef(0.025, 0.025, 0.0f);
+		glTranslatef(1.5, 8.75, 0.0);
+		float offsetRoomIdText=t3dDraw2D("User: "+user_input_id+" | ", -1, 1, 0.2f);
+	glPopMatrix();
+
+	glPushMatrix();
+		glColor4f(0.5f, 0.8f, 0.9f, 0.5f);
+		glScalef(0.025, 0.025, 0.0f);
+		glTranslatef(offsetRoomIdText+1.5, 8.75, 0);
+		float toffsetRoomIdText=t3dDraw2D("Room #: "+to_string(room_id), -1, 1, 0.2f);
+	glPopMatrix();
+}
+
+/*
+	Draw state functions
+*/
+
+/* Draw menu */
+void drawStateMenu(){
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0,  windowWidth, windowHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+	
+	// title image
+	drawBackground(aboutTexture);
+
+	// host box
+	drawHostBox(hostBoxAlive);
+
+	// join box
+	drawJoinBox(joinBoxAlive);
+
+	// exit box
+	drawExitBox(exitBoxAlive);
+
+	// clear color
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+	
+	// animation overlay
+	drawMenuAnimationOverlay();
+}
+
+/* Draw state to retreive menu selection */
+void drawStateRoom(){
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	drawBackground(roomTexture);
+
+	drawRoomMessageListScrollbar();
+
+	drawRoomUserListScrollbar();
+
+	drawRoomUserListHeaderText();
+
+	drawRoomUserListText();
+
+	drawRoomClientText();
+
+	drawRoomMessageListText();
+
+	drawRoomInformationText();
+
+	drawRoomBorder();
+
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+}
+
+/* Draw state to retreive room key of room to join */
+void drawStateRoomKey(){
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0,  windowWidth, windowHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	// title image
+	drawBackground(aboutTexture);
+
+	// room box
+	drawRoomBox(roomBoxAlive, room_input_id);
+
+	// back box
+	drawBackBox(backBoxAlive);
+
+	// clear color
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+	
+	// animation overlay
+	drawMenuAnimationOverlay();
+}
+
+/* Draw state to retreive desired username of client */
+void drawStateUsername(){
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0,  windowWidth, windowHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+
+	// title image
+	drawBackground(aboutTexture);
+
+	// user box
+	drawUserBox(userBoxAlive, user_input_id);
+
+	// back box
+	drawBackBox(backBoxAlive);
+
+	// clear color
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+	
+	// animation overlay
+	drawMenuAnimationOverlay();
+
+}
+
+/* Draw state to retreive server IP address */
+void drawStateHostname(){
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0,  windowWidth, windowHeight);
+	glClearColor(1,0,1,0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluOrtho2D(0, 1, 0, 1);
+	glClearColor(1,0,1,0);
+	// title image
+	drawBackground(aboutTexture);
+
+	// user box
+	drawHostnameBox(hostnameBoxAlive, hostname_input_id);
+
+	// exit box
+	drawExitBox(exitBoxAlive);
+
+	// clear color
+	glColor4f(1.0f,1.0f,1.0f,1.0f);
+	
+	// animation overlay
+	drawMenuAnimationOverlay();
+
+}
+
+/* Draw state to exit client */
+void drawStateExit(){
+	t3dCleanup();
+	exit(0);
+}
+
+/* Draw current state */
+void drawState() {
+	
+	// draw current state
+	if(currentState==STATE_ROOM){
+		drawStateRoom();
+	}else if(currentState==STATE_MENU){
+		drawStateMenu();
+		if(loadingState){
+			drawLoadingScreen();
+		}
+	}else if(currentState==STATE_KEY){
+		drawStateRoomKey();
+		if(loadingState){
+			drawLoadingScreen();
+		}
+	}else if(currentState==STATE_USERNAME){
+		drawStateUsername();
+		if(loadingState){
+			drawLoadingScreen();
+		}
+	}else if(currentState==STATE_HOSTNAME){
+		drawStateHostname();
+		if(loadingState){
+			drawLoadingScreen();
+		}
+	}else if(currentState==STATE_EXIT){
+		drawStateExit();
+	}
+
+	//swap
+	glutSwapBuffers();
+}
 
 /*
 	Chatroom and server functions
@@ -182,8 +819,8 @@ void addToChat(std::string line){
 	
 }
 
-/* Parse comma deliminated string and store contents */
-void parseCommaDeliminatedServerData(char recvbuf[DEFAULT_BUFLEN]){
+/* Parse comma deliminated chatroom data */
+void parseCommaDeliminatedRoomData(char recvbuf[DEFAULT_BUFLEN]){
 	
 	//convert char[] to std::string
 	std::string recvstrbuf(recvbuf);
@@ -289,14 +926,64 @@ void parseCommaDeliminatedServerData(char recvbuf[DEFAULT_BUFLEN]){
 
 }
 
+/* Parse comma deliminated response packet from request to join room, return true if room successfully joined */
+bool parseCommaDeliminatedMenuData(char recvbuf[DEFAULT_BUFLEN], string& roomId){
+	
+	bool success=false;
+	string recvbufString(recvbuf);
+
+	if(recvbufString[1]=='0'){
+		success=true;
+		recvbufString.erase(0,3);
+
+		roomId=recvbufString.substr(0,recvbufString.find(',', 0));
+		cout << "Room id: '" << roomId << "'" << endl;
+	}else{
+		success=false;
+	}
+
+	return success;
+
+}
+
+/* Loads texture into OpenGL 2d texture using SOIL */
+GLuint SOILLoadTexture(std::string filename){
+
+	int width, height, channels;
+	GLuint tempTexture;
+
+	unsigned char* data = SOIL_load_image( filename.c_str(), &width, &height, &channels, SOIL_LOAD_AUTO );
+	if ( data )
+	{
+		tempTexture = SOIL_create_OGL_texture( data, width, height, channels, SOIL_CREATE_NEW_ID, 0 );
+	}
+
+	/* check for an error during the load process */
+	if( 0 == tempTexture )
+	{
+		printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
+	}
+
+	/* Free Image */
+	SOIL_free_image_data( data );
+
+	return tempTexture;
+
+}
+
 /* Initialize states, textures, and enables/disables */
-void initRendering(){
+void init(){
+
+	cout << "~CLIENT~\n" << endl;
 
 	//seed
 	srand(time(NULL));
 
 	//init font
 	t3dInit();
+
+	//set loading text
+	loadingStateText="Loading...";
 
 	//init game state at menu
 	currentState=STATE_HOSTNAME;
@@ -311,15 +998,44 @@ void initRendering(){
 		userShortList[i]="";
 	}
 
-	//textures
-	Image* aboutImage = loadBMP("title.bmp");
-	aboutTexture = loadTexture(aboutImage);
-	Image* roomImage = loadBMP("border.bmp");
-	roomTexture = loadTexture(roomImage);
-	Image* scrollImage = loadBMP("scrollbar.bmp");
-	scrollTexture = loadTexture(scrollImage);
-	Image* backImage = loadBMP("backbutton.bmp");
-	backTexture = loadTexture(backImage);
+	/* Load textures */
+	scrollTexture=SOILLoadTexture("scrollbar.png");
+	roomTexture=SOILLoadTexture("border.png");
+	aboutTexture=SOILLoadTexture("title.png");
+	
+	// loading icon animation
+	for(int i=0; i<MAX_LOADING_FRAMES; i++){
+
+		/* Load image */
+		std::string str = "loading/loading00";
+		str+=to_string(i+1);
+		str+=".png";
+		loadingTexture[i]=SOILLoadTexture(str);
+
+	}
+	drawLoadingScreen(); // draw animation once to fix animation glitch
+
+	// menu title animation
+	for(int i=0; i<MAX_MENU_ANIMATION_FRAMES; i++){
+
+		/* Load image */
+		std::string str = "menu/title00";
+		str+=to_string(i+1);
+		str+=".png";
+		menuAnimationTexture[i]=SOILLoadTexture(str);
+
+	}
+	
+	// border animation
+	for(int i=0; i<MAX_BORDER_ANIMATION_FRAMES; i++){
+
+		/* Load image */
+		std::string str = "border/border00";
+		str+=to_string(i+1);
+		str+=".png";
+		borderAnimationTexture[i]=SOILLoadTexture(str);
+
+	}
 
 	//enables/disables
 	glDisable(GL_DEPTH_TEST);
@@ -328,12 +1044,77 @@ void initRendering(){
 
 }
 
-/* Connect to server */
-bool connectToServer(){
+/* Attempt to connect to server room */
+void attemptServerRoomJoin() {
+	
+	loadingState=true;
+	bool successfullyJoinedRoom=false;
+	string packetRoomJoin="";
+	string receivedRoomId="";
 
-	cout << "~CLIENT~\n" << endl;
+	// make packet
+	if(HostOrJoin=="host"){
 
-    // Initialize Winsock
+		//send 0(host)
+		packetRoomJoin+=",0,";
+
+		//send desired username to server
+		string tempUserId = user_input_id;
+		tempUserId.append(",");
+		packetRoomJoin+=tempUserId;
+
+	}else{
+
+		//send 1(join)
+		packetRoomJoin+=",1,";
+
+		//send room number
+		string tempRoomId = room_input_id;
+		tempRoomId.append(",");
+		packetRoomJoin+=tempRoomId;
+
+		//send desired username to server
+		string tempUserId = user_input_id;
+		tempUserId.append(",");
+		packetRoomJoin+=tempUserId;
+
+	}
+
+	// send request to join room packet
+	send(ConnectSocket, packetRoomJoin.c_str(), strlen(packetRoomJoin.c_str())+2, 0);
+	cout << "Send: '" << packetRoomJoin.c_str() << "'" << endl;
+
+	// receive result from request to join room
+	recv(ConnectSocket,recvbuf,recvbuflen,0);
+
+	// if successful response to join room
+	if(parseCommaDeliminatedMenuData(recvbuf, packetRoomJoin)){
+
+		// set state to currently in room
+		currentState=STATE_ROOM;
+
+		// set room and user id
+		room_id=atoi(packetRoomJoin.c_str());
+		user_id=atoi(user_input_id.c_str());
+
+		//change to non-blocking socket
+		u_long iMode=1;
+		ioctlsocket(ConnectSocket,FIONBIO,&iMode);
+
+	}else{
+		MessageBox(NULL,"Error - Room key is invalid or room contains a user with the same name as yours.","Server error",MB_OK);
+	}
+
+	loadingState=false;
+	
+}
+
+/* Attempt to connect to server */
+bool attemptServerConnect(){
+
+	loadingState=true;
+
+	// Initialize Winsock
     WSAStartup(MAKEWORD(2,2), &wsaData);
 
     ZeroMemory( &hints, sizeof(hints) );
@@ -344,7 +1125,7 @@ bool connectToServer(){
     // Resolve the server address and port
     iResult = getaddrinfo(hostname_input_id.c_str(), DEFAULT_PORT, &hints, &result);
 
-    // Attempt to connect to address until one succeeds
+    // AoffsetRoomIdTextt to connect to address until one succeeds
     for(ptr=result; ptr != NULL ;ptr=ptr->ai_next) {
 
         // Create a SOCKET for connecting to server
@@ -356,100 +1137,31 @@ bool connectToServer(){
 
         // Connect to server
         iResult = connect( ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+		loadingState=false;
         if (iResult == SOCKET_ERROR) {
 			lastSocketErrorCode=WSAGetLastError();
 			cout << "CAN'T CONNECT!" << ", Socket Error:" << lastSocketErrorCode << endl;
+
             closesocket(ConnectSocket);
+
+			/* Display socket error message box*/
+			char buffer[7];
+			itoa(lastSocketErrorCode,buffer,10);
+			std::string temp(buffer);
+			std::string strPlusErrorCode = "Invalid server, socket error: "+temp;
+			MessageBox(NULL,strPlusErrorCode.c_str(),"Server error",MB_OK);
+
 			return false;
             continue;
-        }
+        }else{
+			currentState=STATE_MENU;
+		}
         break;
     }
 
     freeaddrinfo(result);
 
 	return true;
-}
-
-/* Join room */
-bool joinServerRoom(){
-	
-
-	//host or join
-	if(HostOrJoin=="host"){
-
-		//send 0
-		send( ConnectSocket, "0", 3, 0 );
-		cout << "Sent: " << "0" << endl;
-
-		//recv
-		recv(ConnectSocket, recvbuf, recvbuflen, 0);
-		cout << "Recv: " << recvbuf << endl;
-
-		if(recvbuf[0]=='0'){
-			
-			//send desired username to server
-			send( ConnectSocket, user_input_id.c_str(), strlen(user_input_id.c_str())+2, 0 );
-			cout << "Sent: " << user_input_id.c_str() << endl;
-
-			//recv
-			recv(ConnectSocket, recvbuf, recvbuflen, 0);
-			cout << "Recv: " << recvbuf << endl;
-
-			//set room and user id
-			room_id=atoi(recvbuf);
-			user_id=atoi(user_input_id.c_str());
-
-			return true;
-
-		}else{
-			//no available rooms, repeat menu selection
-			return false;
-		}
-
-	}else{
-
-		//send 1
-		send( ConnectSocket, "1", 3, 0 );
-		cout << "Sent: " << "1" << endl;
-		
-
-		//send room number
-		send(ConnectSocket, room_input_id.c_str(), strlen(room_input_id.c_str()), 0 );
-		cout << "Sent: " << room_input_id << endl;
-
-		//recv
-		recv(ConnectSocket, recvbuf, recvbuflen, 0);
-		cout << "Recv: " << recvbuf << endl;
-		
-		if(recvbuf[0]=='0'){
-
-			//send desired username to server
-			send( ConnectSocket, user_input_id.c_str(), strlen(user_input_id.c_str())+2, 0 );
-			cout << "Sent: " << user_input_id.c_str() << endl;
-
-			//set room and user id
-			room_id=atoi(room_input_id.c_str());
-			user_id=atoi(user_input_id.c_str());
-
-			return true;
-
-		}else{
-			//room doesnt exist or is full, repeat menu selection
-			return false;
-		}
-
-
-	}
-
-	// set GUI room info
-	yo="";
-	if(HostOrJoin=="host"){
-		yo="host";
-	}else{
-		yo+=room_id+","+user_id;
-	}
-
 }
 
 /* Update server */
@@ -477,7 +1189,7 @@ void updateServer(){
 		cout << "Received: " << recvbuf << endl << endl;
 			
 		//update user list with new server data
-		parseCommaDeliminatedServerData(recvbuf);
+		parseCommaDeliminatedRoomData(recvbuf);
 	}
 
 	
@@ -487,7 +1199,7 @@ void updateServer(){
 void update(int value) {
 
 	/* Update server if in room */
-	if(serverUp){
+	if(currentState==STATE_ROOM){
 		updateServer();
 	}
 
@@ -567,91 +1279,98 @@ void mouseMovement(int x, int y) {
 /* Executed on mouse click */
 void mouseClicked(int button, int state, int x, int y){
 
-	if(currentState==STATE_MENU){
+	// if not loading
+	if(!loadingState){
 
-		// if host box clicked
-		if( checkHostBoxClicked(x, y, windowWidth, windowHeight, button, state) ){
-			HostOrJoin="host";
-			currentState=STATE_USERNAME;
-		}
+		// handle mouse events for current state
+		if(currentState==STATE_MENU){
+
+			// if host box clicked
+			if( checkHostBoxClicked(x, y, windowWidth, windowHeight, button, state) ){
+				HostOrJoin="host";
+				currentState=STATE_USERNAME;
+			}
 		
-		// if join box clicked
-		checkJoinBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
+			// if join box clicked
+			checkJoinBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
-		// if exit box clicked
-		checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
+			// if exit box clicked
+			checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
-	}else if(currentState==STATE_ROOM){
+		}else if(currentState==STATE_ROOM){
 
-		if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
+			if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN){
 
-			// if clicked inside user scroll, return alive flag
-			userScrollActive=isUserScrollActive(x,y,userScrollPos);
+				// if clicked inside user scroll, return alive flag
+				userScrollActive=isUserScrollActive(x,y,userScrollPos);
 
-			// if clicked inside chat scroll, return alive flag
-			chatScrollActive=isChatScrollActive(x,y,chatScrollPos);
+				// if clicked inside chat scroll, return alive flag
+				chatScrollActive=isChatScrollActive(x,y,chatScrollPos);
 
-			// if clicked inside text enter log, return alive flag
-			textEnterLogActive=isTextEnterLogActive(x,y);
+				// if clicked inside text enter log, return alive flag
+				textEnterLogActive=isTextEnterLogActive(x,y);
 
-			// check "leave" button
-			if(checkBackButtonClicked(x,y)){
-				//send user back to menu
-				currentState=STATE_MENU;
-				serverUp=false;
-				firstTimeUserListSent=false;
+				// check "leave" button
+				if(checkBackButtonClicked(x,y)){
+					//send user back to menu
+					currentState=STATE_MENU;
+					firstTimeUserListSent=false;
 
-				//reset to blocking socket
-				u_long iMode=0;
-				ioctlsocket(ConnectSocket,FIONBIO,&iMode);
+					//reset to blocking socket
+					u_long iMode=0;
+					ioctlsocket(ConnectSocket,FIONBIO,&iMode);
 
-				//erase message and user list
-				while(messageList.size()!=0){
-					messageList.pop_back();
-				}
-				for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
-					messageListShortList[i]="";
-				}
-				while(userList.size()!=0){
-					userList.pop_back();
-				}
-				for(int i=0;i<MAX_DISPLAY_USERS;i++){
-					userShortList[i]="";
-				}
+					//erase message and user list
+					while(messageList.size()!=0){
+						messageList.pop_back();
+					}
+					for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
+						messageListShortList[i]="";
+					}
+					while(userList.size()!=0){
+						userList.pop_back();
+					}
+					for(int i=0;i<MAX_DISPLAY_USERS;i++){
+						userShortList[i]="";
+					}
 
-				//close socket and reconnect
-				shutdown(ConnectSocket, SD_BOTH);
-				WSACleanup();
-				closesocket(ConnectSocket);
-				connectToServer();
+					//reset
+					shutdown(ConnectSocket, SD_BOTH);
+					WSACleanup();
+					closesocket(ConnectSocket);
+
+					//reconnect to server
+					thread(attemptServerConnect).detach();
 				
+				}
+
 			}
 
+		}else if(currentState==STATE_KEY){
+	
+			// if room box clicked
+			checkRoomBoxClicked(x, y, windowWidth, windowHeight, button, state, roomIdTextClicked);
+	
+			// if back box clicked
+			checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
+
+		}else if(currentState==STATE_USERNAME){
+
+			// if user box clicked
+			checkUserBoxClicked(x, y, windowWidth, windowHeight, button, state, userIdTextClicked);
+	
+			// if back box clicked
+			checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
+
+		}else if(currentState==STATE_HOSTNAME){
+
+			// if hostname box clicked
+			checkHostnameBoxClicked(x, y, windowWidth, windowHeight, button, state, hostnameIdTextClicked);
+
+			// if exit box clicked
+			checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
+
 		}
-
-	}else if(currentState==STATE_KEY){
-	
-		// if room box clicked
-		checkRoomBoxClicked(x, y, windowWidth, windowHeight, button, state, roomIdTextClicked);
-	
-		// if back box clicked
-		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
-
-	}else if(currentState==STATE_USERNAME){
-
-		// if user box clicked
-		checkUserBoxClicked(x, y, windowWidth, windowHeight, button, state, userIdTextClicked);
-	
-		// if back box clicked
-		checkBackBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
-
-	}else if(currentState==STATE_HOSTNAME){
-
-		// if hostname box clicked
-		checkHostnameBoxClicked(x, y, windowWidth, windowHeight, button, state, hostnameIdTextClicked);
-
-		// if exit box clicked
-		checkExitBoxClicked(x, y, windowWidth, windowHeight, button, state, currentState);
 
 	}
 	
@@ -695,168 +1414,158 @@ void mouseClickedActive(int x, int y){
 /* Executed on any key press down */
 void handleKeypress(unsigned char key, int x, int y){
 
-	//smooth camera movement
-	if(currentState==STATE_ROOM){
+	// if not loading
+	if(!loadingState){
 
-		if(textEnterLogActive){
+		// handle keyboard events for current state
+		if(currentState==STATE_ROOM){
+
+			if(textEnterLogActive){
 			
-			//delete key
-			if(key==8){
+				//delete key
+				if(key==8){
 
-				//if in line one, else line two
-				if( textEnterLogLineOneActive ){
+					//if in line one, else line two
+					if( textEnterLogLineOneActive ){
 
-					//if more characters can fit on first line, add character
-					if(textEnterLogOne.length()!=NULL){
+						//if more characters can fit on first line, add character
+						if(textEnterLogOne.length()!=NULL){
 
-						//delete previpus character
-						textEnterLogOneTotalWidth-=getFontCharWidth(textEnterLogOne[textEnterLogOne.length()-1]);
-						textEnterLogOne.erase(textEnterLogOne.length()-1);
-					}
-
-				}else{
-
-					//if more characters can fit on second line, add character
-					if(textEnterLogTwo.length()!=NULL){
-
-						//delete previpus character
-						textEnterLogTwoTotalWidth-=getFontCharWidth(textEnterLogTwo[textEnterLogTwo.length()-1]);
-						textEnterLogTwo.erase(textEnterLogTwo.length()-1);
-						if(textEnterLogTwo.length()==NULL){
-							textEnterLogLineOneActive=true;
+							//delete previpus character
+							textEnterLogOneTotalWidth-=getFontCharWidth(textEnterLogOne[textEnterLogOne.length()-1]);
+							textEnterLogOne.erase(textEnterLogOne.length()-1);
 						}
+
+					}else{
+
+						//if more characters can fit on second line, add character
+						if(textEnterLogTwo.length()!=NULL){
+
+							//delete previpus character
+							textEnterLogTwoTotalWidth-=getFontCharWidth(textEnterLogTwo[textEnterLogTwo.length()-1]);
+							textEnterLogTwo.erase(textEnterLogTwo.length()-1);
+							if(textEnterLogTwo.length()==NULL){
+								textEnterLogLineOneActive=true;
+							}
+						}
+
 					}
 
+				//enter key
+				}else if(key==13){
+				
+					//send message
+					sendCurrentMessage=true;
+					lastSentTextEnterLog=textEnterLog;
+
+					//reset text enter box
+					textEnterLogOne.clear();
+					textEnterLogTwo.clear();
+					textEnterLogOneTotalWidth=0.0f;
+					textEnterLogTwoTotalWidth=0.0f;
+					textEnterLogLineOneActive=true;
+
+				//comma or colon key
+				}else if( (key==44) || (key==58)){
+				
+
+				//other key
+				}else{
+				
+					//if in line one, else line two
+					if( textEnterLogLineOneActive ){
+					
+						//add key
+						textEnterLogOne+=key;
+						textEnterLogOneTotalWidth+=getFontCharWidth(key);
+					
+						if( ((textEnterLogTextLen+textEnterLogOneTotalWidth)>=TEXT_ENTER_WIDTH_MAX) ){
+							textEnterLogLineOneActive=false;
+						}
+					}else{
+
+						//if user-entered text for line two is within limit, add character
+						if( ((textEnterLogTwoTotalWidth)<TEXT_ENTER_WIDTH_MAX) ){
+							//add key
+							textEnterLogTwo+=key;
+							textEnterLogTwoTotalWidth+=getFontCharWidth(key);
+						}
+
+					}
 				}
+			
+			}
 
-			//enter key
-			}else if(key==13){
-				
-				//send message
-				sendCurrentMessage=true;
-				lastSentTextEnterLog=textEnterLog;
+			//update line one+two into full text string
+			textEnterLog=textEnterLogOne+textEnterLogTwo;
 
-				//reset text enter box
-				textEnterLogOne.clear();
-				textEnterLogTwo.clear();
-				textEnterLogOneTotalWidth=0.0f;
-				textEnterLogTwoTotalWidth=0.0f;
-				textEnterLogLineOneActive=true;
-
-			//comma or colon key
-			}else if( (key==44) || (key==58)){
-				
-
-			//other key
-			}else{
-				
-				//if in line one, else line two
-				if( textEnterLogLineOneActive ){
-					
-					//add key
-					textEnterLogOne+=key;
-					textEnterLogOneTotalWidth+=getFontCharWidth(key);
-					
-					if( ((textEnterLogTextLen+textEnterLogOneTotalWidth)>=TEXT_ENTER_WIDTH_MAX) ){
-						textEnterLogLineOneActive=false;
+		}else if(currentState==STATE_KEY){
+		
+			if(roomIdTextClicked){
+			
+				if(key==8){
+					//clear string
+					room_input_id.clear();
+					room_id_len=0;
+				}else if(key==13){
+					//enter key
+					if(checkRoomId(room_input_id)){
+						HostOrJoin="join";
+						currentState=STATE_USERNAME;
 					}
 				}else{
-
-					//if user-entered text for line two is within limit, add character
-					if( ((textEnterLogTwoTotalWidth)<TEXT_ENTER_WIDTH_MAX) ){
+					//if room id's char limit not exceeded, add key
+					if(room_id_len<MAX_ROOM_ID_CHARS){
 						//add key
-						textEnterLogTwo+=key;
-						textEnterLogTwoTotalWidth+=getFontCharWidth(key);
+						room_input_id+=key;
+						room_id_len++;
 					}
-
 				}
+
 			}
-			
-		}
 
-		//update line one+two into full text string
-		textEnterLog=textEnterLogOne+textEnterLogTwo;
+		}else if(currentState==STATE_USERNAME){
 
-	}else if(currentState==STATE_KEY){
+			if(userIdTextClicked){
+
+				if(key==8){
+					//clear string
+					user_input_id.clear();
+					user_id_len=0;
+				}else if(key==13){
+					//enter key
+					thread attempt(attemptServerRoomJoin);
+					attempt.detach();
+				}else{
+					//if room id's char limit not exceeded, add key
+					if(user_id_len<MAX_USER_ID_CHARS){
+						//add key
+						user_input_id+=key;
+						user_id_len++;
+					}
+				}
+
+			}
+
+		}else if(currentState==STATE_HOSTNAME){
 		
-		if(roomIdTextClicked){
-			
 			if(key==8){
 				//clear string
-				room_input_id.clear();
-				room_id_len=0;
+				hostname_input_id.clear();
+				hostname_id_len=0;
 			}else if(key==13){
 				//enter key
-				if(checkRoomId(room_input_id)){
-					HostOrJoin="join";
-					currentState=STATE_USERNAME;
-				}
+				thread(attemptServerConnect).detach();
 			}else{
 				//if room id's char limit not exceeded, add key
-				if(room_id_len<MAX_ROOM_ID_CHARS){
+				if(hostname_id_len<MAX_HOSTNAME_CHARS){
 					//add key
-					room_input_id+=key;
-					room_id_len++;
+					hostname_input_id+=key;
+					hostname_id_len++;
 				}
 			}
 
 		}
-
-	}else if(currentState==STATE_USERNAME){
-
-		if(userIdTextClicked){
-
-			if(key==8){
-				//clear string
-				user_input_id.clear();
-				user_id_len=0;
-			}else if(key==13){
-				//enter key
-				if(joinServerRoom()){
-					serverUp=true;
-					currentState=STATE_ROOM;
-
-					//change to non-blocking socket
-					u_long iMode=1;
-					ioctlsocket(ConnectSocket,FIONBIO,&iMode);
-				}
-			}else{
-				//if room id's char limit not exceeded, add key
-				if(user_id_len<MAX_USER_ID_CHARS){
-					//add key
-					user_input_id+=key;
-					user_id_len++;
-				}
-			}
-
-		}
-
-	}else if(currentState==STATE_HOSTNAME){
-
-		if(key==8){
-			//clear string
-			hostname_input_id.clear();
-			hostname_id_len=0;
-		}else if(key==13){
-			//enter key
-			if(connectToServer()){
-				currentState=STATE_MENU;
-			}else{
-				char buffer[7];
-				itoa(lastSocketErrorCode,buffer,10);
-				std::string temp(buffer);
-				std::string strPlusErrorCode = "Invalid server, socket error: "+temp;
-				MessageBox(NULL,strPlusErrorCode.c_str(),"Server error",MB_OK);
-			}
-		}else{
-			//if room id's char limit not exceeded, add key
-			if(hostname_id_len<MAX_HOSTNAME_CHARS){
-				//add key
-				hostname_input_id+=key;
-				hostname_id_len++;
-			}
-		}
-
 	}
 
 	//escape key
@@ -872,7 +1581,7 @@ void handleKeypressUp(unsigned char key, int x, int y){
 
 }
 
-/* Handle resize - Don't resize if client attempts to resize */
+/* Handle resize - Don't resize if client aoffsetRoomIdTextts to resize */
 void handleResize(int w, int h) {
 	//for resizeable
 	//glViewport(0, 0, w/1.3, h);
@@ -882,601 +1591,20 @@ void handleResize(int w, int h) {
 	glutReshapeWindow(windowWidth,windowHeight);
 }
 
-/*
-	Draw text, background color, or texture functions
-*/
-
-/* Draw full-window texture background */
-void drawBackground(GLuint texture){
-
-	glViewport(0, 0, windowWidth, windowHeight);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	//enables/disables
-	glEnable(GL_TEXTURE_2D);
-
-	//bind texture
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	//draw about screen
-	glBegin(GL_QUADS); 
-		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
-		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
-		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
-		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
-	glEnd();
-
-	//enables/disables
-	glDisable(GL_TEXTURE_2D);
-
-}
-
-/* Draw chatroom client's text to send to chatroom */
-void drawRoomClientText(){
-
-	glViewport(20, 19, 510, 80);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	if(textEnterLogActive){
-		glColor4f(0.5f,0.5f,0.5f,0.5f);
-	}else{
-		glColor4f(0.35f,0.35f,0.35f,0.5f);
-	}
-
-	glPushMatrix();
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-
-	glPushMatrix();
-		glColor4f(0.15f,0.15f,0.15f,0.5f);
-		glScalef(0.02, 0.15, 0.0f);
-		glTranslatef(1.0, 5.0, 0.0);
-		float ttemp=t3dDraw2D(user_input_id+":  ", -1, 1, 0.2f);
-		textEnterLogTextLen=ttemp;
-	glPopMatrix();
-	
-	glPushMatrix();
-		glColor4f(0.15f,0.15f,0.15f,0.5f);
-		glScalef(0.02, 0.15, 0.0f);
-		glTranslatef(ttemp+0.75, 5.0, 0.0);
-		float tttemp=t3dDraw2D(textEnterLogOne, -1, 1, 0.2f);
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor4f(0.15f,0.15f,0.15f,0.5f);
-		glScalef(0.02, 0.15, 0.0f);
-		glTranslatef(0.75, 3.25, 0.0);
-		float ttttemp=t3dDraw2D(textEnterLogTwo, -1, 1, 0.2f);
-	glPopMatrix();
-
-}
-
-/* Draw chatroom message list background colors */
-void drawRoomMessageListBackground(){
-
-	glViewport(21, 119, 449, 339);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glColor4f(0.35f,0.35f,0.35f,0.5f);
-
-	glPushMatrix();
-		glTranslatef(0,0,0.0f);
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-
-
-
-	glViewport(470, 119, 20, 339);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glColor4f(0.2f,0.2f,0.2f,0.5f);
-
-	glPushMatrix();
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom message list scrollbar */
-void drawRoomMessageListScrollbar(){
-
-	glViewport(470, chatScrollPos, 20, 40);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	//enables/disables
-	glEnable(GL_TEXTURE_2D);
-
-	//bind texture
-	glBindTexture(GL_TEXTURE_2D, scrollTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	//draw about screen
-	glBegin(GL_QUADS); 
-		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
-		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
-		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
-		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
-	glEnd();
-
-	//enables/disables
-	glDisable(GL_TEXTURE_2D);
-
-}
-
-/* Draw chatroom message list */
-void drawRoomMessageListText(){
-
-	float j=440.0f;
-	for(int i=0;i<MAX_DISPLAY_MESSAGES;i++){
-
-		glViewport(24, j, 443, 20);
-		glClearColor(1,1,1,0);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		gluOrtho2D(0, 1, 0, 1);
-
-		glColor4f(0.9f,0.9f,0.9f,0.5f);
-	
-		glPushMatrix();
-			glColor4f(0.15f,0.15f,0.15f,0.5f);
-			glScalef(0.025, 0.75, 0.0f);
-			glTranslatef(0.15, 0.0, 0);
-			float temp=t3dDraw2D(messageListShortList[i], -1, 1, 0.2f);
-		glPopMatrix();
-
-		//space between messages in message list
-		j-=20.0f;
-	}
-
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom user list background colors */
-void drawRoomUserListBackground(){
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-	glViewport(510, 119, 89, 339);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glColor4f(0.35f,0.35f,0.35f,0.5f);
-
-	glPushMatrix();
-		glTranslatef(0,0,0.0f);
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-
-
-	glViewport(599, 119, 21, 339);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glColor4f(0.2f,0.2f,0.2f,0.5f);
-
-	glPushMatrix();
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom user list scrollbar */
-void drawRoomUserListScrollbar(){
-
-	glViewport(599, userScrollPos, 20, 40);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	//enables/disables
-	glEnable(GL_TEXTURE_2D);
-	
-	//bind texture
-	glBindTexture(GL_TEXTURE_2D, scrollTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	//draw about screen
-	glBegin(GL_QUADS); 
-		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
-		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
-		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
-		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
-	glEnd();
-
-	//enables/disables
-	glDisable(GL_TEXTURE_2D);
-
-}
-
-/* Draw chatroom back button */
-void drawRoomBackButton(){
-
-	glViewport(556, 19, 64, 80);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	//enables/disables
-	glEnable(GL_TEXTURE_2D);
-
-	//bind texture
-	glBindTexture(GL_TEXTURE_2D, backTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	//draw about screen
-	glBegin(GL_QUADS); 
-		glTexCoord2f( 0.0f, 0.0f );glVertex2f( 0.0f, 0.0f); //top-left
-		glTexCoord2f( 1.0f, 0.0f );glVertex2f( 1.0f, 0.0f); //top-right
-		glTexCoord2f( 1.0f, 1.0f );glVertex2f( 1.0f,  1.0f); //bottom-right
-		glTexCoord2f( 0.0f, 1.0f );glVertex2f( 0.0f,  1.0f); //bottom-left
-	glEnd();
-
-	//enables/disables
-	glDisable(GL_TEXTURE_2D);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom user list header text */
-void drawRoomUserListHeaderText(){
-	
-	glViewport(514, 430, 80, 23);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glColor4f(0.9f,0.9f,0.9f,0.5f);
-
-	glPushMatrix();
-		glBegin(GL_QUADS);
-			glVertex2f(0.0,0.0);
-			glVertex2f(1.0,0.0);
-			glVertex2f(1.0,1.0);
-			glVertex2f(0.0,1.0);
-		glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor4f(0.3f, 0.3f, 0.3f, 0.25f);
-		glScalef(0.2, 1.0, 0.0f);
-		glTranslatef(0.85, 0.0, 0);
-		float temp=t3dDraw2D("Users", -1, 1, 0.2f);
-	glPopMatrix();
-
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom user list text */
-void drawRoomUserListText(){
-
-	float j=400.0f;
-	for(int i=0;i<MAX_DISPLAY_USERS;i++){
-
-		glViewport(514, j, 80, 20);
-		glClearColor(1,1,1,0);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		gluOrtho2D(0, 1, 0, 1);
-
-		glColor4f(0.9f,0.9f,0.9f,0.5f);
-
-		if(userShortList[i]!=""){
-			glPushMatrix();
-				glBegin(GL_QUADS);
-					glVertex2f(0.0,0.0);
-					glVertex2f(1.0,0.0);
-					glVertex2f(1.0,1.0);
-					glVertex2f(0.0,1.0);
-				glEnd();
-			glPopMatrix();
-		}
-
-		glPushMatrix();
-			glColor4f(0.3f, 0.3f, 0.3f, 0.25f);
-			glScalef(0.125, 0.85, 0.0f);
-			glTranslatef(0.15, 0.0, 0);
-			float temp=t3dDraw2D(userShortList[i], -1, 1, 0.2f);
-		glPopMatrix();
-
-		j-=30.0f;
-	}
-
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw chatroom information text */
-void drawRoomInformationText(){
-
-	glViewport(20, 460, 320, 20);
-	glClearColor(1,1,1,0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	glPushMatrix();
-		glColor4f(0.75f,0.75f,0.75f,0.5f);
-		glScalef(0.04, 0.65, 0.0f);
-		glTranslatef(0.0, 0.4, 0.0);
-		float ttemp=t3dDraw2D("User: "+user_input_id+" | ", -1, 1, 0.2f);
-	glPopMatrix();
-
-	glPushMatrix();
-		glColor4f(0.75f,0.75f,0.75f,0.5f);
-		glScalef(0.04, 0.65, 0.0f);
-		glTranslatef(ttemp, 0.4, 0);
-		float tttemp=t3dDraw2D("Room #: "+to_string((long double)room_id), -1, 1, 0.2f);
-	glPopMatrix();
-}
-
-/*
-	Draw state functions
-*/
-
-/* Draw menu */
-void drawStateMenu(){
-
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0,  windowWidth, windowHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-	
-	// title image
-	drawBackground(aboutTexture);
-
-	// host box
-	drawHostBox(hostBoxAlive);
-
-	// join box
-	drawJoinBox(joinBoxAlive);
-
-	// exit box
-	drawExitBox(exitBoxAlive);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-}
-
-/* Draw state to retreive menu selection */
-void drawStateRoom(){
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	drawBackground(roomTexture);
-
-	drawRoomInformationText();
-
-	drawRoomMessageListBackground();
-
-	drawRoomMessageListScrollbar();
-
-	drawRoomUserListBackground();
-
-	drawRoomUserListScrollbar();
-
-	drawRoomUserListHeaderText();
-
-	drawRoomUserListText();
-
-	drawRoomClientText();
-
-	drawRoomMessageListText();
-
-	drawRoomBackButton();
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-}
-
-/* Draw state to retreive room key of room to join */
-void drawStateRoomKey(){
-
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0,  windowWidth, windowHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	// title image
-	drawBackground(aboutTexture);
-
-	// room box
-	drawRoomBox(roomBoxAlive, room_input_id);
-
-	// back box
-	drawBackBox(backBoxAlive);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-}
-
-/* Draw state to retreive desired username of client */
-void drawStateUsername(){
-
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0,  windowWidth, windowHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	// title image
-	drawBackground(aboutTexture);
-
-	// user box
-	drawUserBox(userBoxAlive, user_input_id);
-
-	// back box
-	drawBackBox(backBoxAlive);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw state to retreive server IP address */
-void drawStateHostname(){
-
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0,  windowWidth, windowHeight);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluOrtho2D(0, 1, 0, 1);
-
-	// title image
-	drawBackground(aboutTexture);
-
-	// user box
-	drawHostnameBox(hostnameBoxAlive, hostname_input_id);
-
-	// exit box
-	drawExitBox(exitBoxAlive);
-
-	glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-}
-
-/* Draw state to exit client */
-void drawStateExit(){
-	exit(0);
-}
-
-/* Draw current state */
-void drawState() {
-
-	// draw current state
-	if(currentState==STATE_MENU){
-		drawStateMenu();
-	}else if(currentState==STATE_ROOM){
-		drawStateRoom();
-	}else if(currentState==STATE_KEY){
-		drawStateRoomKey();
-	}else if(currentState==STATE_USERNAME){
-		drawStateUsername();
-	}else if(currentState==STATE_HOSTNAME){
-		drawStateHostname();
-	}else if(currentState==STATE_EXIT){
-		drawStateExit();
-	}
-
-	//swap
-	glutSwapBuffers();
-}
 
 /* Main OpenGL loop */
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(windowWidth, windowHeight);
-	glutCreateWindow("Polished IRC");
+	glutCreateWindow("Polished IRC 1.2.0");
 	glewInit();
 	GLenum err = glewInit();
     if(GLEW_OK != err) {
 		cout << "glewInit failed." << endl;
     }
 
-	initRendering();
+	init();
 	glutDisplayFunc(drawState);
 	glutMouseFunc(mouseClicked);
 	glutPassiveMotionFunc(mouseMovement);

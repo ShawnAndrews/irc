@@ -18,9 +18,6 @@
     <ClCompile Include="glew.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imageloader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SOCKETclient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,9 +33,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imageloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SOCKETclient.h">
