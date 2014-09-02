@@ -1,7 +1,7 @@
-Polished IRC 1.3.0
+Polished IRC 1.2.0
 ===
 
-![alt tag](http://oi62.tinypic.com/a5etef.jpg)
+![alt tag](http://oi60.tinypic.com/5zfprn.jpg)
 
 
 ## What is Polished IRC?
@@ -34,4 +34,4 @@ Polished IRC is a fdl.
 
 ## Screenshots
 
-![alt tag](http://oi58.tinypic.com/rkv3tk.jpg)
+![alt tag](http://oi62.tinypic.com/2u5gjgy.jpg)
